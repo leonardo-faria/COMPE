@@ -6,9 +6,11 @@ public class MyListener extends XmltoSdlParserBaseListener {
 	@Override
 	public void exitRegion(@NotNull XmltoSdlParser.RegionContext ctx) {
 
-		if (ctx.value().getText().length() > 50) { // tirar aspas
+		String str = ctx.value().getText().split("\"")[1];
+
+		if (str.length() > 48) {
 			System.out.println("Line " + ctx.value().getStart().getLine()
-					+ ": invalid " + ctx.value().getText());
+					+ ": invalid " + str);
 			return;
 		}
 	}
@@ -28,7 +30,11 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			System.out.println("Line " + ctx.value().getStart().getLine()
 					+ ": invalid " + ctx.value().getText());
 			return;
+		} catch (NullPointerException e) {
+			System.out.println("Missing component lat");
+			return;
 		}
+
 	}
 
 	@Override
@@ -46,21 +52,30 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			System.out.println("Line " + ctx.value().getStart().getLine()
 					+ ": invalid " + ctx.value().getText());
 			return;
+		} catch (NullPointerException e) {
+			System.out.println("Missing component lon");
+			return;
 		}
 	}
 
 	@Override
 	public void exitAlt(@NotNull XmltoSdlParser.AltContext ctx) {
 
-		String str = ctx.value().getText().split("\"")[1];
+		try {
+			String str = ctx.value().getText().split("\"")[1];
 
-		if (Pattern.compile("[a-zA-Z]").matcher(str).find()) {
-			if (str.charAt((str.length() - 1)) != -'M'
-					&& str.charAt((str.length() - 1)) != 'F') {
-				System.out.println("Line " + ctx.value().getStart().getLine()
-						+ ": invalid " + ctx.value().getText());
-				return;
+			if (Pattern.compile("[a-zA-Z]").matcher(str).find()) {
+				if (str.charAt((str.length() - 1)) != -'M'
+						&& str.charAt((str.length() - 1)) != 'F') {
+					System.out.println("Line "
+							+ ctx.value().getStart().getLine() + ": invalid "
+							+ ctx.value().getText());
+					return;
+				}
 			}
+		} catch (NullPointerException e) {
+			System.out.println("Missing component alt");
+			return;
 		}
 	}
 
@@ -85,9 +100,14 @@ public class MyListener extends XmltoSdlParserBaseListener {
 	@Override
 	public void exitIdent(@NotNull XmltoSdlParser.IdentContext ctx) {
 
-		if (ctx.value().getText().split("\"")[1].length() > 4) {
-			System.out.println("Line " + ctx.value().getStart().getLine()
-					+ ": invalid " + ctx.value().getText());
+		try {
+			if (ctx.value().getText().split("\"")[1].length() > 4) {
+				System.out.println("Line " + ctx.value().getStart().getLine()
+						+ ": invalid " + ctx.value().getText());
+				return;
+			}
+		} catch (NullPointerException e) {
+			System.out.println("Missing component ident");
 			return;
 		}
 	}
@@ -96,14 +116,19 @@ public class MyListener extends XmltoSdlParserBaseListener {
 	public void exitAirportTestRadius(
 			@NotNull XmltoSdlParser.AirportTestRadiusContext ctx) {
 
-		String str = ctx.value().getText().split("\"")[1];
+		try {
+			String str = ctx.value().getText().split("\"")[1];
 
-		if (str.charAt((str.length() - 1)) != 'M'
-				&& str.charAt((str.length() - 1)) != 'F'
-				&& str.charAt((str.length() - 1)) != 'N') {
-			System.out.println("Line " + ctx.value().getStart().getLine()
-					+ ": invalid " + str);
-			
+			if (str.charAt((str.length() - 1)) != 'M'
+					&& str.charAt((str.length() - 1)) != 'F'
+					&& str.charAt((str.length() - 1)) != 'N') {
+				System.out.println("Line " + ctx.value().getStart().getLine()
+						+ ": invalid " + str);
+
+				return;
+			}
+		} catch (NullPointerException e) {
+			System.out.println("Missing component airport test radius");
 			return;
 		}
 	}
@@ -123,6 +148,9 @@ public class MyListener extends XmltoSdlParserBaseListener {
 		} catch (NumberFormatException e) {
 			System.out.println("Line " + ctx.value().getStart().getLine()
 					+ ": invalid " + ctx.value().getText());
+			return;
+		} catch (NullPointerException e) {
+			System.out.println("Missing component traffic scalar");
 			return;
 		}
 	}

@@ -1,0 +1,16 @@
+<Airport
+      region="North America"
+      country="United States"
+      state="Illinois"
+      city="Peru"
+      name="Illinois Valley Regional"
+      lat="41.35186742"
+      lon="-89.15308328"
+      alt="199.33918762"
+      magvar="0.0"
+      ident="KVYS"
+airportTestRadius="25M"
+trafficScalar="0.5"
+coco = "cera"
+banana>
+</Airport>
