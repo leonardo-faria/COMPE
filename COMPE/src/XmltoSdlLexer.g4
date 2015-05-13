@@ -19,7 +19,7 @@ ALT: 'alt';
 MAGVAR: 'magvar';
 IDENT: 'ident';
 ATR: 'airportTestRadius';
-TRAFFICSCALLAR: 'trafficScallar';
+TRAFFICSCALAR: 'trafficScalar';
 SERVICES: 'Services';
 FUEL: 'Fuel';
 TYPE: 'type';

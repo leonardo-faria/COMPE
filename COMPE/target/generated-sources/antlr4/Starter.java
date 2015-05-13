@@ -15,11 +15,17 @@ public class Starter {
 		if(args.length > 0) inputFile = args[0];
 		InputStream is = System.in;
 		if(inputFile != null) is = new FileInputStream(inputFile);
+		
 		ANTLRInputStream input = new ANTLRInputStream(is);
+		
 		XmltoSdlLexer lexer = new XmltoSdlLexer(input);
+		
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
+		
 		XmltoSdlParser parser = new XmltoSdlParser(tokens);
-		ParserRuleContext tree = parser.start(); // parse
+		
+		ParserRuleContext tree = parser.startpoint(); // parse
+		
 		System.out.println(tree.toStringTree(parser)); // print LISP-style tree
 		ParseTreeWalker walker = new ParseTreeWalker(); // create standard walker
 														
