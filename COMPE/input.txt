@@ -4,13 +4,41 @@
       state="Illinois"
       city="Peru"
       name="Illinois Valley Regional"
-      lat="41.35186742"
-      lon="-89.15308328"
+	  lat="40.23"
+      lon="-89.15308328"	
       alt="199.33918762"
       magvar="0.0"
       ident="KVYS"
 airportTestRadius="25M"
-trafficScalar="0.5"
-coco = "cera"
-banana>
+trafficScalar="0.5">
+<Runway
+      lat="41.35184943"
+      lon="-89.15309158"
+      alt="199.33918762"
+      surface="ASPHALT"
+      heading="179.580000"
+      length="6000F"
+      width="100F"
+      number="18"
+      designator="NONE"
+      patternAltitude="304.799988"
+      secondaryTakeoff="YES"
+      secondaryPattern="LEFT"
+      primaryMarkingBias = "52N"
+      secondaryMarkingBias = "52N">
+      <Markings
+      edges="TRUE"
+      threshold="TRUE"
+      fixedDistance="TRUE"
+      touchdown="TRUE"
+      dashes="TRUE"
+      ident="TRUE"
+      precision="TRUE"
+      edgePavement="TRUE"
+      singleEnd="TRUE"
+      primaryClosed="TRUE"
+      secondaryClosed="TRUE"
+      primaryStol="TRUE"
+      secondaryStol="TRUE"/>
+</Runway>
 </Airport>

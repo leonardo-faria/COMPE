@@ -5,7 +5,7 @@ options {
 }
   
   
-startpoint: document EOF;
+startpoint: document;
 document: airport+;
   
 airport   
@@ -96,7 +96,7 @@ threshold: THRESHOLD EQUALS value;
 fixedDistance: FIXEDDISTANCE EQUALS value;
 touchdown: TOUCHDOWN EQUALS value;
 dashes: DASHES EQUALS value;
-marking_ident: MARKING_IDENT EQUALS value;
+marking_ident: IDENT EQUALS value;
 precision: PRECISION EQUALS value;
 edgePavement: EDGEPAVEMENT EQUALS value;
 singleEnd: SINGLEEND EQUALS value;
@@ -140,8 +140,8 @@ frequency: FREQUENCY EQUALS value;
 range: RANGE EQUALS value;
 backCourse: BACKCOURSE EQUALS value;
 
-ils_content: (glideScope)* (dme)* (visualModel)*;
-glideScope: OPEN GLIDESCOPE lat lon alt pitch range SLASH_CLOSE;
+ils_content: (glideSlope)* (dme)* (visualModel)*;
+glideSlope: OPEN GLIDESLOPE lat lon alt pitch range SLASH_CLOSE;
 dme: OPEN DME lat lon alt range SLASH_CLOSE;
 
 visualModel: visualModel_open visualModel_content visualModel_close;
