@@ -1,0 +1,1895 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="dcs:scenario">
+	<bases>
+		<baseOfOperations id="b1">
+			<name>Whidbey Island Naval Air Station</name>
+			<mobility water="true" underwater="false" land="true" air="true" />
+			<description>XXX Description XXX</description>
+			<history>XXX History XXX</history>
+			<contactPerson>
+				<name>XXX Name XXX</name>
+				<title>XXX Title XXX</title>
+				<institution>XXX Institution XXX</institution>
+				<position>XXX Position XXX</position>
+				<address>XXX Address XXX</address>
+				<zipCode>XXX ZipCode XXX</zipCode>
+				<city>XXX City XXX</city>
+				<stateDistrictRegion>XXX State XXX</stateDistrictRegion>
+				<country>XXX Country XXX</country>
+				<telephone>XXX Telephone XXX</telephone>
+				<cellphone>XXX Cellphone XXX</cellphone>
+				<fax>XXX Fax XXX</fax>
+				<email>XXX email XXX</email>
+			</contactPerson>
+			<location>
+				<address>xxxxxxxxxxxxx</address>
+				<zipCode>xxxxxxxxxxxxx</zipCode>
+				<city>Whidbey Island</city>
+				<stateDistrictRegion>Island County, WA</stateDistrictRegion>
+				<country>USA</country>
+				<coordinates>
+					<latitude>48º 21' 6.49'' N</latitude>
+					<longitude>122º 39' 21.26'' W</longitude>
+					<altitude measured="amsl">47</altitude>
+				</coordinates>
+			</location>
+			<availability available="always" />
+			<airport>
+				<name>Whidbey Island Naval Air Station</name>
+				<description>XXX Description XXX</description>
+				<contactPerson>
+					<name>XXX Name XXX</name>
+					<title>XXX Title XXX</title>
+					<institution>XXX Institution XXX</institution>
+					<position>XXX Position XXX</position>
+					<address>XXX Address XXX</address>
+					<zipCode>XXX ZipCode XXX</zipCode>
+					<city>XXX City XXX</city>
+					<stateDistrictRegion>XXX State XXX</stateDistrictRegion>
+					<country>XXX Country XXX</country>
+					<telephone>XXX Telephone XXX</telephone>
+					<cellphone>XXX Cellphone XXX</cellphone>
+					<fax>XXX Fax XXX</fax>
+					<email>XXX email XXX</email>
+				</contactPerson>
+				<location>
+					<address>xxxxxxxxxxxxx</address>
+					<zipCode>xxxxxxxxxxxxx</zipCode>
+					<city>Whidbey Island</city>
+					<stateDistrictRegion>Island County, WA</stateDistrictRegion>
+					<country>USA</country>
+					<coordinates>
+						<latitude>48º 21' 6.49'' N</latitude>
+						<longitude>122º 39' 21.26'' W</longitude>
+						<altitude measured="amsl">48</altitude>
+					</coordinates>
+				</location>
+				<ICAO>KNUW</ICAO>
+				<IATA>NUW</IATA>
+				<magVar>21</magVar>
+				<runways>
+					<runway id="r07-25">
+						<coordinates>
+							<latitude>48º 21' 6.76'' N</latitude>
+							<longitude>122º 39' 23.17'' W</longitude>
+							<altitude measured="amsl">48</altitude>
+						</coordinates>
+						<length lengthUnit="Meter">2434</length>
+						<width lengthUnit="Meter">60.96</width>
+						<surface>Concrete</surface>
+						<baseEnd>
+							<designation>07</designation>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 21' 4.93'' N</latitude>
+									<longitude>122º 40' 15.25'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x02" />
+									<xway idr="x05" />
+								</connectsTo>
+							</startpoint>
+							<heading headingType="True">86.97</heading>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 21' 8.80'' N</latitude>
+									<longitude>122º 38' 25.42'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x03" />
+								</connectsTo>
+							</endpoint>
+						</baseEnd>
+						<reciprocalEnd>
+							<designation>25</designation>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 21' 8.80'' N</latitude>
+									<longitude>122º 38' 25.42'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x03" />
+								</connectsTo>
+							</startpoint>
+							<heading headingType="True">266.97</heading>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 21' 4.93'' N</latitude>
+									<longitude>122º 40' 15.25'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x02" />
+									<xway idr="x05" />
+								</connectsTo>
+							</endpoint>
+						</reciprocalEnd>
+					</runway>
+					<runway id="r13-31">
+						<coordinates>
+							<latitude>48º 21' 6.44'' N</latitude>
+							<longitude>122º 39' 19.60'' W</longitude>
+							<altitude measured="amsl">48</altitude>
+						</coordinates>
+						<length lengthUnit="Meter">2436</length>
+						<width lengthUnit="Meter">60.96</width>
+						<surface>Concrete</surface>
+						<baseEnd>
+							<designation>13</designation>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 21' 41.12'' N</latitude>
+									<longitude>122º 39' 44.24'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x02" />
+								</connectsTo>
+							</startpoint>
+							<heading headingType="True">154.68</heading>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 20' 31.68'' N</latitude>
+									<longitude>122º 38' 54.89'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x04" />
+								</connectsTo>
+							</endpoint>
+						</baseEnd>
+						<reciprocalEnd>
+							<designation>31</designation>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 20' 31.68'' N</latitude>
+									<longitude>122º 38' 54.89'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x04" />
+								</connectsTo>
+							</startpoint>
+							<heading headingType="True">334.68</heading>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 21' 41.12'' N</latitude>
+									<longitude>122º 39' 44.24'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x02" />
+								</connectsTo>
+							</endpoint>
+						</reciprocalEnd>
+					</runway>
+				</runways>
+				<helipads />
+				<taxiways>
+					<taxiway id="x01">
+						<designation>Taxiway A</designation>
+						<surface>Concrete</surface>
+						<width lengthUnit="Foot">30.48</width>
+						<path>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 20' 15.96'' N</latitude>
+									<longitude>122º 39' 28.43'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x05" />
+								</connectsTo>
+							</startpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 20' 17.48'' N</latitude>
+									<longitude>122º 39' 38.83'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x04" />
+								</connectsTo>
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 20' 32.17'' N</latitude>
+									<longitude>122º 39' 52.48'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x03" />
+								</connectsTo>
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 20' 56.75' N</latitude>
+									<longitude>122º 40' 15.24'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x10" />
+								</connectsTo>
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 20' 58.02'' N</latitude>
+									<longitude>122º 40' 16.42'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 20' 59.89'' N</latitude>
+									<longitude>122º 40' 10.45'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x05" />
+									<xway idr="x07" />
+								</connectsTo>
+							</midpoint>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 21' 5.67'' N</latitude>
+									<longitude>122º 39' 54.27'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<rway idr="r07-25" />
+								</connectsTo>
+							</endpoint>
+						</path>
+					</taxiway>
+					<taxiway id="x02">
+						<designation>Taxiway B</designation>
+						<surface>Concrete</surface>
+						<width lengthUnit="Foot">30.48</width>
+						<path>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 21' 4.93'' N</latitude>
+									<longitude>122º 40' 15.25'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<rway idr="r07-25" />
+								</connectsTo>
+							</startpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 21' 9.20'' N</latitude>
+									<longitude>122º 40' 19.12'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 21' 38.87'' N</latitude>
+									<longitude>122º 39' 51.40'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 21' 41.12'' N</latitude>
+									<longitude>122º 39' 44.24'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<rway idr="r13-31" />
+								</connectsTo>
+							</endpoint>
+						</path>
+					</taxiway>
+					<taxiway id="x03">
+						<designation>Taxiway C</designation>
+						<surface>Concrete</surface>
+						<width lengthUnit="Foot">30.48</width>
+						<path>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 20' 32.17'' N</latitude>
+									<longitude>122º 39' 52.48'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x01" />
+								</connectsTo>
+							</startpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 20' 33.88'' N</latitude>
+									<longitude>122º 39' 45.55'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x05" />
+								</connectsTo>
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 20' 37.16'' N</latitude>
+									<longitude>122º 39' 31.79'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x11" />
+								</connectsTo>
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 20' 39.93'' N</latitude>
+									<longitude>122º 39' 20.21'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 20' 48.52'' N</latitude>
+									<longitude>122º 39' 6.85'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<rway idr="r13-31" />
+								</connectsTo>
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 21' 1.18'' N</latitude>
+									<longitude>122º 38' 47.27'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x06" />
+								</connectsTo>
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 21' 1.76'' N</latitude>
+									<longitude>122º 38' 24.74'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 21' 8.80'' N</latitude>
+									<longitude>122º 38' 25.42'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<rway idr="r07-25" />
+								</connectsTo>
+							</endpoint>
+						</path>
+					</taxiway>
+					<taxiway id="x04">
+						<designation>Taxiway D</designation>
+						<surface>Concrete</surface>
+						<width lengthUnit="Foot">30.48</width>
+						<path>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 20' 17.48'' N</latitude>
+									<longitude>122º 39' 38.83'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x01" />
+								</connectsTo>
+							</startpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 20' 19.69'' N</latitude>
+									<longitude>122º 39' 31.98'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x05" />
+								</connectsTo>
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 20' 28.72'' N</latitude>
+									<longitude>122º 39' 4.01'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x09" />
+								</connectsTo>
+							</midpoint>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 20' 31.68'' N</latitude>
+									<longitude>122º 38' 54.89'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<rway idr="r13-31" />
+								</connectsTo>
+							</endpoint>
+						</path>
+					</taxiway>
+					<taxiway id="x05">
+						<designation>Taxiway E</designation>
+						<surface>Concrete</surface>
+						<width lengthUnit="Foot">30.48</width>
+						<path>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 20' 15.96'' N</latitude>
+									<longitude>122º 39' 28.43'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x01" />
+								</connectsTo>
+							</startpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 20' 19.69'' N</latitude>
+									<longitude>122º 39' 31.98'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x04" />
+								</connectsTo>
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 20' 33.88'' N</latitude>
+									<longitude>122º 39' 45.55'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x03" />
+								</connectsTo>
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 20' 51.42'' N</latitude>
+									<longitude>122º 40' 2.38'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x07" />
+								</connectsTo>
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 20' 56.87'' N</latitude>
+									<longitude>122º 40' 7.57'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x10" />
+								</connectsTo>
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 20' 59.89'' N</latitude>
+									<longitude>122º 40' 10.45'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x01" />
+									<xway idr="x07" />
+								</connectsTo>
+							</midpoint>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 21' 4.93'' N</latitude>
+									<longitude>122º 40' 15.25'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<rway idr="r07-25" />
+								</connectsTo>
+							</endpoint>
+						</path>
+					</taxiway>
+					<taxiway id="x06">
+						<designation>Taxiway F</designation>
+						<surface>Concrete</surface>
+						<width lengthUnit="Foot">30.48</width>
+						<path>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 21' 1.18'' N</latitude>
+									<longitude>122º 38' 47.27'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x03" />
+								</connectsTo>
+							</startpoint>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 21' 8.03'' N</latitude>
+									<longitude>122º 38' 47.26'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<rway idr="r07-25" />
+								</connectsTo>
+							</endpoint>
+						</path>
+					</taxiway>
+					<taxiway id="x07">
+						<designation>Taxiway G</designation>
+						<surface>Concrete</surface>
+						<width lengthUnit="Foot">30.48</width>
+						<path>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 20' 51.42'' N</latitude>
+									<longitude>122º 40' 2.38'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x05" />
+								</connectsTo>
+							</startpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 20' 47.74'' N</latitude>
+									<longitude>122º 39' 45.00'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x08" />
+								</connectsTo>
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 20' 42.82'' N</latitude>
+									<longitude>122º 39' 22.20'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 20' 43.96'' N</latitude>
+									<longitude>122º 39' 19.15'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 20' 45.56'' N</latitude>
+									<longitude>122º 39' 17.66'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 20' 48.08' N</latitude>
+									<longitude>122º 39' 17.59'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 20' 50.23'' N</latitude>
+									<longitude>122º 39' 19.35'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 20' 54.61'' N</latitude>
+									<longitude>122º 39' 42.22'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x08" />
+								</connectsTo>
+							</midpoint>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 20' 59.89'' N</latitude>
+									<longitude>122º 40' 10.45'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x01" />
+									<xway idr="x05" />
+								</connectsTo>
+							</endpoint>
+						</path>
+					</taxiway>
+					<taxiway id="x08">
+						<designation>Taxiway H</designation>
+						<surface>Concrete</surface>
+						<width lengthUnit="Foot">30.48</width>
+						<path>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 20' 47.74'' N</latitude>
+									<longitude>122º 39' 45.00'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x07" />
+								</connectsTo>
+							</startpoint>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 20' 54.61'' N</latitude>
+									<longitude>122º 39' 42.22'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x07" />
+								</connectsTo>
+							</endpoint>
+						</path>
+					</taxiway>
+					<taxiway id="x09">
+						<designation>Taxiway I</designation>
+						<surface>Concrete</surface>
+						<width lengthUnit="Foot">30.48</width>
+						<path>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 20' 28.72'' N</latitude>
+									<longitude>122º 39' 4.01'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x04" />
+								</connectsTo>
+							</startpoint>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 20' 38.08'' N</latitude>
+									<longitude>122º 38' 59.44'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<rway idr="r13-31" />
+								</connectsTo>
+							</endpoint>
+						</path>
+					</taxiway>
+					<taxiway id="x10">
+						<designation>Taxiway J</designation>
+						<surface>Concrete</surface>
+						<width lengthUnit="Foot">30.48</width>
+						<path>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 20' 56.75' N</latitude>
+									<longitude>122º 40' 15.24'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x01" />
+								</connectsTo>
+							</startpoint>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 20' 56.87'' N</latitude>
+									<longitude>122º 40' 7.57'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x05" />
+								</connectsTo>
+							</endpoint>
+						</path>
+					</taxiway>
+					<taxiway id="x11">
+						<designation>Taxiway K</designation>
+						<surface>Concrete</surface>
+						<width lengthUnit="Foot">30.48</width>
+						<path>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 20' 37.16'' N</latitude>
+									<longitude>122º 39' 31.79'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x03" />
+								</connectsTo>
+							</startpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 20' 35.96'' N</latitude>
+									<longitude>122º 39' 29.03'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 20' 35.60'' N</latitude>
+									<longitude>122º 39' 27.17'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 20' 39.67'' N</latitude>
+									<longitude>122º 39' 9.32'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+								<connectsTo />
+							</endpoint>
+						</path>
+					</taxiway>
+				</taxiways>
+				<parkingSpaces>
+					<parking parkingType="Medium" id="p01">
+						<designation>Parking 1</designation>
+						<description>Usually used for medium sized aircraft</description>
+						<airlines>
+						</airlines>
+						<coordinates>
+							<latitude>48º 20' 38.60'' N</latitude>
+							<longitude>122º 39' 7.87'' W</longitude>
+							<altitude measured="amsl">48</altitude>
+						</coordinates>
+						<radius lengthUnit="Foot">52.49</radius>
+						<connectsToTaxiway xway="x11">
+								<coordinates>
+									<latitude>48º 20' 39.67'' N</latitude>
+									<longitude>122º 39' 9.32'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+						</connectsToTaxiway>
+					</parking>
+					<parking parkingType="Medium" id="p02">
+						<designation>Parking 2</designation>
+						<description>Usually used for medium sized aircraft</description>
+						<airlines>
+						</airlines>
+						<coordinates>
+							<latitude>48º 20' 11.96'' N</latitude>
+							<longitude>122º 39' 30.05'' W</longitude>
+							<altitude measured="amsl">48</altitude>
+						</coordinates>
+						<radius lengthUnit="Foot">52.49</radius>
+						<connectsToTaxiway xway="x01">
+								<coordinates>
+									<latitude>48º 20' 15.96'' N</latitude>
+									<longitude>122º 39' 28.43'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+						</connectsToTaxiway>
+					</parking>
+					<parking parkingType="Medium" id="p03">
+						<designation>Parking 3</designation>
+						<description>Usually used for medium sized aircraft</description>
+						<airlines>
+						</airlines>
+						<coordinates>
+							<latitude>48º 20' 9.23'' N</latitude>
+							<longitude>122º 39' 38.93'' W</longitude>
+							<altitude measured="amsl">48</altitude>
+						</coordinates>
+						<radius lengthUnit="Foot">52.49</radius>
+						<connectsToTaxiway xway="x01">
+								<coordinates>
+									<latitude>48º 20' 17.48'' N</latitude>
+									<longitude>122º 39' 38.83'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+						</connectsToTaxiway>
+					</parking>
+					<parking parkingType="Medium" id="p04">
+						<designation>Parking 4</designation>
+						<description>Usually used for medium sized aircraft</description>
+						<airlines>
+						</airlines>
+						<coordinates>
+							<latitude>48º 20' 31.09'' N</latitude>
+							<longitude>122º 39' 56.97'' W</longitude>
+							<altitude measured="amsl">48</altitude>
+						</coordinates>
+						<radius lengthUnit="Foot">52.49</radius>
+						<connectsToTaxiway xway="x01">
+								<coordinates>
+									<latitude>48º 20' 32.17'' N</latitude>
+									<longitude>122º 39' 52.48'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+						</connectsToTaxiway>
+					</parking>
+					<parking parkingType="Medium" id="p05">
+						<designation>Parking 5</designation>
+						<description>Usually used for medium sized aircraft</description>
+						<airlines>
+						</airlines>
+						<coordinates>
+							<latitude>48º 20' 55.22'' N</latitude>
+							<longitude>122º 40' 19.21'' W</longitude>
+							<altitude measured="amsl">48</altitude>
+						</coordinates>
+						<radius lengthUnit="Foot">52.49</radius>
+						<connectsToTaxiway xway="x01">
+								<coordinates>
+									<latitude>48º 20' 56.75' N</latitude>
+									<longitude>122º 40' 15.24'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+						</connectsToTaxiway>
+					</parking>
+					<parking parkingType="Medium" id="p06">
+						<designation>Parking 6</designation>
+						<description>Usually used for medium sized aircraft</description>
+						<airlines>
+						</airlines>
+						<coordinates>
+							<latitude>48º 20' 58.57'' N</latitude>
+							<longitude>122º 40' 23.91'' W</longitude>
+							<altitude measured="amsl">48</altitude>
+						</coordinates>
+						<radius lengthUnit="Foot">52.49</radius>
+						<connectsToTaxiway xway="x01">
+								<coordinates>
+									<latitude>48º 20' 58.02'' N</latitude>
+									<longitude>122º 40' 16.42'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+						</connectsToTaxiway>
+					</parking>
+					<parking parkingType="Medium" id="p08">
+						<designation>Parking 8</designation>
+						<description>Usually used for medium sized aircraft</description>
+						<airlines>
+						</airlines>
+						<coordinates>
+							<latitude>48º 21' 0.50'' N</latitude>
+							<longitude>122º 40' 18.90'' W</longitude>
+							<altitude measured="amsl">48</altitude>
+						</coordinates>
+						<radius lengthUnit="Foot">52.49</radius>
+						<connectsToTaxiway xway="x01">
+								<coordinates>
+									<latitude>48º 20' 58.02'' N</latitude>
+									<longitude>122º 40' 16.42'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+						</connectsToTaxiway>
+					</parking>
+					<parking parkingType="Medium" id="p07">
+						<designation>Parking 7</designation>
+						<description>Usually used for medium sized aircraft</description>
+						<airlines>
+						</airlines>
+						<coordinates>
+							<latitude>48º 20' 13.07'' N</latitude>
+							<longitude>122º 39' 50.54'' W</longitude>
+							<altitude measured="amsl">48</altitude>
+						</coordinates>
+						<radius lengthUnit="Foot">52.49</radius>
+						<connectsToTaxiway xway="x01">
+								<coordinates>
+									<latitude>48º 20' 17.48'' N</latitude>
+									<longitude>122º 39' 38.83'' W</longitude>
+									<altitude measured="amsl">48</altitude>
+								</coordinates>
+						</connectsToTaxiway>
+					</parking>
+				</parkingSpaces>
+				<hangars />
+				<utilities>
+					<tower id="u01">
+						<designation>Tower</designation>
+						<coordinates>
+							<latitude>48º 20' 54.05'' N</latitude>
+							<longitude>122º 40' 22.88'' W</longitude>
+							<altitude measured="amsl">48</altitude>
+						</coordinates>
+						<radius lengthUnit="Meter">2.55</radius>
+						<height lengthUnit="Meter">129</height>
+					</tower>
+				</utilities>
+			</airport>
+		</baseOfOperations>
+		<baseOfOperations id="b2">
+			<name>Friday Harbor</name>
+			<mobility water="true" underwater="false" land="true" air="true" />
+			<description>xxxxxxxxxxxxx</description>
+			<history>xxxxxxxxx</history>
+			<contactPerson>
+				<name>XXX Name XXX</name>
+				<title>XXX Title XXX</title>
+				<institution>XXX Institution XXX</institution>
+				<position>XXX Position XXX</position>
+				<address>XXX Address XXX</address>
+				<zipCode>XXX ZipCode XXX</zipCode>
+				<city>XXX City XXX</city>
+				<stateDistrictRegion>XXX State XXX</stateDistrictRegion>
+				<country>XXX Country XXX</country>
+				<telephone>XXX Telephone XXX</telephone>
+				<cellphone>XXX Cellphone XXX</cellphone>
+				<fax>XXX Fax XXX</fax>
+				<email>XXX email XXX</email>
+			</contactPerson>
+			<location>
+				<address>Franklin Rd</address>
+				<zipCode>370-436</zipCode>
+				<city>Friday Harbor</city>
+				<stateDistrictRegion>Washington</stateDistrictRegion>
+				<country>United States</country>
+				<coordinates>
+					<latitude>48º 31' 19.49'' N</latitude>
+					<longitude>123º 1' 27.65'' W</longitude>
+					<altitude measured="amsl">121</altitude>
+				</coordinates>
+			</location>
+			<availability available="always" />
+			<airport>
+				<name>Friday Harbor Airport</name>
+				<description>xxxxxxxxxx</description>
+				<contactPerson>
+					<name>XXX Name XXX</name>
+					<title>XXX Title XXX</title>
+					<institution>XXX Institution XXX</institution>
+					<position>XXX Position XXX</position>
+					<address>XXX Address XXX</address>
+					<zipCode>XXX ZipCode XXX</zipCode>
+					<city>XXX City XXX</city>
+					<stateDistrictRegion>XXX State XXX</stateDistrictRegion>
+					<country>XXX Country XXX</country>
+					<telephone>XXX Telephone XXX</telephone>
+					<cellphone>XXX Cellphone XXX</cellphone>
+					<fax>XXX Fax XXX</fax>
+					<email>XXX email XXX</email>
+				</contactPerson>
+				<location>
+					<address>Franklin Rd</address>
+					<zipCode>370-436</zipCode>
+					<city>Friday Harbor</city>
+					<stateDistrictRegion>Washington</stateDistrictRegion>
+					<country>United States</country>
+					<coordinates>
+						<latitude>48º 31' 19.49'' N</latitude>
+						<longitude>123º 1' 27.65'' W</longitude>
+						<altitude measured="amsl">121</altitude>
+					</coordinates>
+				</location>
+				<ICAO>KFHR</ICAO>
+				<IATA>FRD</IATA>
+				<magVar>-4.951</magVar>
+				<runways>
+					<runway id="r16-34">
+						<coordinates>
+							<latitude>48º 31' 19.10'' N</latitude>
+							<longitude>123º 1' 27.70'' W</longitude>
+							<altitude measured="amsl">121</altitude>
+						</coordinates>
+						<length lengthUnit="Meter">1700</length>
+						<width lengthUnit="Meter">22.86</width>
+						<surface>Asphalt</surface>
+						<baseEnd>
+							<designation>16</designation>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 31' 35.52'' N</latitude>
+									<longitude>123º 1' 29.01'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x05" />
+								</connectsTo>
+							</startpoint>
+							<heading headingType="True">177.05</heading>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 31' 2.63'' N</latitude>
+									<longitude>123º 1' 26.45'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x01" />
+								</connectsTo>
+							</endpoint>
+						</baseEnd>
+						<reciprocalEnd>
+							<designation>34</designation>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 31' 2.63'' N</latitude>
+									<longitude>123º 1' 26.45'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x01" />
+								</connectsTo>
+							</startpoint>
+							<heading headingType="True">357.05</heading>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 31' 35.52'' N</latitude>
+									<longitude>123º 1' 29.01'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x05" />
+								</connectsTo>
+							</endpoint>
+						</reciprocalEnd>
+					</runway>
+				</runways>
+				<helipads />
+				<taxiways>
+					<taxiway id="x01">
+						<designation>Taxiway A</designation>
+						<surface>Asphalt</surface>
+						<width lengthUnit="Foot">40</width>
+						<path>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 31' 2.63'' N</latitude>
+									<longitude>123º 1' 26.45'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<rway idr="r16-34" />
+								</connectsTo>
+							</startpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 2.55'' N</latitude>
+									<longitude>123º 1' 29.23'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 12.36'' N</latitude>
+									<longitude>123º 1' 29.93'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x02" />
+								</connectsTo>
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 23.90'' N</latitude>
+									<longitude>123º 1' 30.77'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x03" />
+								</connectsTo>
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 27.01'' N</latitude>
+									<longitude>123º 1' 31.01'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x04" />
+								</connectsTo>
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 30.62'' N</latitude>
+									<longitude>123º 1' 31.28'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x03" />
+								</connectsTo>
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 31.43'' N</latitude>
+									<longitude>123º 1' 31.34'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 32.12'' N</latitude>
+									<longitude>123º 1' 31.39'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 31' 35.44'' N</latitude>
+									<longitude>123º 1' 31.61'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x05" />
+								</connectsTo>
+							</endpoint>
+						</path>
+					</taxiway>
+					<taxiway id="x02">
+						<designation>Taxiway B</designation>
+						<surface>Asphalt</surface>
+						<width lengthUnit="Foot">100</width>
+						<path>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 31' 12.49'' N</latitude>
+									<longitude>123º 1' 27.22'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<rway idr="r16-34" />
+								</connectsTo>
+							</startpoint>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 31' 12.36'' N</latitude>
+									<longitude>123º 1' 29.93'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x01" />
+								</connectsTo>
+							</endpoint>
+						</path>
+					</taxiway>
+					<taxiway id="x03">
+						<designation>Taxiway C</designation>
+						<surface>Asphalt</surface>
+						<width lengthUnit="Foot">100</width>
+						<path>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 31' 23.90'' N</latitude>
+									<longitude>123º 1' 30.77'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x01" />
+								</connectsTo>
+							</startpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 23.88'' N</latitude>
+									<longitude>123º 1' 32.35'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 24.71'' N</latitude>
+									<longitude>123º 1' 32.39'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 25.69'' N</latitude>
+									<longitude>123º 1' 32.44'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 26.48'' N</latitude>
+									<longitude>123º 1' 32.48'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 27.14'' N</latitude>
+									<longitude>123º 1' 32.51'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 27.89'' N</latitude>
+									<longitude>123º 1' 32.56'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 28.78'' N</latitude>
+									<longitude>123º 1' 32.60'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 29.60'' N</latitude>
+									<longitude>123º 1' 32.65'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 30.62'' N</latitude>
+									<longitude>123º 1' 32.70'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 31' 30.62'' N</latitude>
+									<longitude>123º 1' 31.28'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x01" />
+								</connectsTo>
+							</endpoint>
+						</path>
+					</taxiway>
+					<taxiway id="x04">
+						<designation>Taxiway D</designation>
+						<surface>Asphalt</surface>
+						<width lengthUnit="Foot">100</width>
+						<path>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 31' 25.31'' N</latitude>
+									<longitude>123º 1' 28.21'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<rway idr="r16-34" />
+								</connectsTo>
+							</startpoint>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 31' 27.01'' N</latitude>
+									<longitude>123º 1' 31.01'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x01" />
+								</connectsTo>
+							</endpoint>
+						</path>
+					</taxiway>
+					<taxiway id="x05">
+						<designation>Taxiway E</designation>
+						<surface>Asphalt</surface>
+						<width lengthUnit="Foot">100</width>
+						<path>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 31' 35.41'' N</latitude>
+									<longitude>123º 1' 33.09'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x06" />
+								</connectsTo>
+							</startpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 35.44'' N</latitude>
+									<longitude>123º 1' 31.61'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x01" />
+								</connectsTo>
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 35.52'' N</latitude>
+									<longitude>123º 1' 29.01'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<rway idr="r16-34" />
+								</connectsTo>
+							</midpoint>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 31' 35.72'' N</latitude>
+									<longitude>123º 1' 23.62'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x09" />
+								</connectsTo>
+							</endpoint>
+						</path>
+					</taxiway>
+					<taxiway id="x06">
+						<designation>Taxiway F</designation>
+						<surface>Asphalt</surface>
+						<width lengthUnit="Foot">100</width>
+						<path>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 31' 33.02'' N</latitude>
+									<longitude>123º 1' 32.96'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo />
+							</startpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 33.88'' N</latitude>
+									<longitude>123º 1' 33.01'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 34.77'' N</latitude>
+									<longitude>123º 1' 33.05'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 35.41'' N</latitude>
+									<longitude>123º 1' 33.09'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x05" />
+								</connectsTo>
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 35.95'' N</latitude>
+									<longitude>123º 1' 33.11'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x07" />
+								</connectsTo>
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 37.33'' N</latitude>
+									<longitude>123º 1' 33.19'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 38.12'' N</latitude>
+									<longitude>123º 1' 33.23'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 31' 43.49'' N</latitude>
+									<longitude>123º 1' 33.50'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x08" />
+								</connectsTo>
+							</endpoint>
+						</path>
+					</taxiway>
+					<taxiway id="x07">
+						<designation>Taxiway G</designation>
+						<surface>Asphalt</surface>
+						<width lengthUnit="Foot">100</width>
+						<path>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 31' 35.95'' N</latitude>
+									<longitude>123º 1' 33.11'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x06" />
+								</connectsTo>
+							</startpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 35.87'' N</latitude>
+									<longitude>123º 1' 37.66'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 36.60'' N</latitude>
+									<longitude>123º 1' 37.70'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 37.57'' N</latitude>
+									<longitude>123º 1' 37.74'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 31' 38.46'' N</latitude>
+									<longitude>123º 1' 37.78'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo />
+							</endpoint>
+						</path>
+					</taxiway>
+					<taxiway id="x08">
+						<designation>Taxiway H</designation>
+						<surface>Asphalt</surface>
+						<width lengthUnit="Foot">100</width>
+						<path>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 31' 43.49'' N</latitude>
+									<longitude>123º 1' 33.50'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x06" />
+								</connectsTo>
+							</startpoint>
+							<midpoint>
+								<coordinates>
+									<latitude>48º 31' 43.59'' N</latitude>
+									<longitude>123º 1' 30.37'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo />
+							</midpoint>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 31' 43.78'' N</latitude>
+									<longitude>123º 1' 24.38'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x09" />
+								</connectsTo>
+							</endpoint>
+						</path>
+					</taxiway>
+					<taxiway id="x09">
+						<designation>Taxiway I</designation>
+						<surface>Asphalt</surface>
+						<width lengthUnit="Foot">100</width>
+						<path>
+							<startpoint>
+								<coordinates>
+									<latitude>48º 31' 35.72'' N</latitude>
+									<longitude>123º 1' 23.62'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo>
+									<xway idr="x05" />
+								</connectsTo>
+							</startpoint>
+							<endpoint>
+								<coordinates>
+									<latitude>48º 31' 43.78'' N</latitude>
+									<longitude>123º 1' 24.38'' W</longitude>
+									<altitude measured="amsl">121</altitude>
+								</coordinates>
+								<connectsTo />
+							</endpoint>
+						</path>
+					</taxiway>
+				</taxiways>
+				<parkingSpaces>
+					<parking parkingType="Medium" id="p01">
+						<designation>Parking Ramp A</designation>
+						<description>Usually used for medium sized aircraft</description>
+						<airlines />
+						<coordinates>
+							<latitude>48º 31' 25.67'' N</latitude>
+							<longitude>123º 1' 34.48'' W</longitude>
+							<altitude measured="amsl">121</altitude>
+						</coordinates>
+						<radius lengthUnit="Foot">32</radius>
+						<connectsToTaxiway xway="x03">
+							<coordinates>
+								<latitude>48º 31' 25.69'' N</latitude>
+								<longitude>123º 1' 32.44'' W</longitude>
+								<altitude measured="amsl">121</altitude>
+							</coordinates>
+						</connectsToTaxiway>
+					</parking>
+					<parking parkingType="Medium" id="p02">
+						<designation>Parking Ramp B</designation>
+						<description>Usually used for medium sized aircraft</description>
+						<airlines />
+						<coordinates>
+							<latitude>48º 31' 26.47'' N</latitude>
+							<longitude>123º 1' 34.52'' W</longitude>
+							<altitude measured="amsl">121</altitude>
+						</coordinates>
+						<radius lengthUnit="Foot">32</radius>
+						<connectsToTaxiway xway="x03">
+							<coordinates>
+								<latitude>48º 31' 26.48'' N</latitude>
+								<longitude>123º 1' 32.48'' W</longitude>
+								<altitude measured="amsl">121</altitude>
+							</coordinates>
+						</connectsToTaxiway>
+					</parking>
+					<parking parkingType="Medium" id="p03">
+						<designation>Parking Ramp C</designation>
+						<description>Usually used for medium sized aircraft</description>
+						<airlines />
+						<coordinates>
+							<latitude>48º 31' 27.13'' N</latitude>
+							<longitude>123º 1' 34.55'' W</longitude>
+							<altitude measured="amsl">121</altitude>
+						</coordinates>
+						<radius lengthUnit="Foot">32</radius>
+						<connectsToTaxiway xway="x03">
+							<coordinates>
+								<latitude>48º 31' 27.14'' N</latitude>
+								<longitude>123º 1' 32.51'' W</longitude>
+								<altitude measured="amsl">121</altitude>
+							</coordinates>
+						</connectsToTaxiway>
+					</parking>
+					<parking parkingType="Medium" id="p04">
+						<designation>Parking Ramp D</designation>
+						<description>Usually used for medium sized aircraft</description>
+						<airlines />
+						<coordinates>
+							<latitude>48º 31' 27.88'' N</latitude>
+							<longitude>123º 1' 34.59'' W</longitude>
+							<altitude measured="amsl">121</altitude>
+						</coordinates>
+						<radius lengthUnit="Foot">32</radius>
+						<connectsToTaxiway xway="x03">
+							<coordinates>
+								<latitude>48º 31' 27.89'' N</latitude>
+								<longitude>123º 1' 32.56'' W</longitude>
+								<altitude measured="amsl">121</altitude>
+							</coordinates>
+						</connectsToTaxiway>
+					</parking>
+					<parking parkingType="Medium" id="p05">
+						<designation>Parking Ramp E</designation>
+						<description>Usually used for medium sized aircraft</description>
+						<airlines />
+						<coordinates>
+							<latitude>48º 31' 28.76'' N</latitude>
+							<longitude>123º 1' 34.63'' W</longitude>
+							<altitude measured="amsl">121</altitude>
+						</coordinates>
+						<radius lengthUnit="Foot">32</radius>
+						<connectsToTaxiway xway="x03">
+							<coordinates>
+								<latitude>48º 31' 28.78'' N</latitude>
+								<longitude>123º 1' 32.60'' W</longitude>
+								<altitude measured="amsl">121</altitude>
+							</coordinates>
+						</connectsToTaxiway>
+					</parking>
+					<parking parkingType="Medium" id="p06">
+						<designation>Parking Ramp F</designation>
+						<description>Usually used for medium sized aircraft</description>
+						<airlines />
+						<coordinates>
+							<latitude>48º 31' 29.59'' N</latitude>
+							<longitude>123º 1' 34.68'' W</longitude>
+							<altitude measured="amsl">121</altitude>
+						</coordinates>
+						<radius lengthUnit="Foot">32</radius>
+						<connectsToTaxiway xway="x03">
+							<coordinates>
+								<latitude>48º 31' 29.60'' N</latitude>
+								<longitude>123º 1' 32.65'' W</longitude>
+								<altitude measured="amsl">121</altitude>
+							</coordinates>
+						</connectsToTaxiway>
+					</parking>
+					<parking parkingType="Medium" id="p07">
+						<designation>Parking Ramp G</designation>
+						<description>Usually used for medium sized aircraft</description>
+						<airlines />
+						<coordinates>
+							<latitude>48º 31' 31.43'' N</latitude>
+							<longitude>123º 1' 33.26'' W</longitude>
+							<altitude measured="amsl">121</altitude>
+						</coordinates>
+						<radius lengthUnit="Foot">32</radius>
+						<connectsToTaxiway xway="x01">
+							<coordinates>
+								<latitude>48º 31' 31.43'' N</latitude>
+								<longitude>123º 1' 31.34'' W</longitude>
+								<altitude measured="amsl">121</altitude>
+							</coordinates>
+						</connectsToTaxiway>
+					</parking>
+					<parking parkingType="Medium" id="p08">
+						<designation>Parking Ramp H</designation>
+						<description>Usually used for medium sized aircraft</description>
+						<airlines />
+						<coordinates>
+							<latitude>48º 31' 32.12'' N</latitude>
+							<longitude>123º 1' 33.31'' W</longitude>
+							<altitude measured="amsl">121</altitude>
+						</coordinates>
+						<radius lengthUnit="Foot">32</radius>
+						<connectsToTaxiway xway="x01">
+							<coordinates>
+								<latitude>48º 31' 32.12'' N</latitude>
+								<longitude>123º 1' 31.39'' W</longitude>
+								<altitude measured="amsl">121</altitude>
+							</coordinates>
+						</connectsToTaxiway>
+					</parking>
+					<parking parkingType="Medium" id="p09">
+						<designation>Parking Ramp I</designation>
+						<description>Usually used for medium sized aircraft</description>
+						<airlines />
+						<coordinates>
+							<latitude>48º 31' 33.03'' N</latitude>
+							<longitude>123º 1' 34.79'' W</longitude>
+							<altitude measured="amsl">121</altitude>
+						</coordinates>
+						<radius lengthUnit="Foot">32</radius>
+						<connectsToTaxiway xway="x06">
+							<coordinates>
+								<latitude>48º 31' 33.02'' N</latitude>
+								<longitude>123º 1' 32.96'' W</longitude>
+								<altitude measured="amsl">121</altitude>
+							</coordinates>
+						</connectsToTaxiway>
+					</parking>
+					<parking parkingType="Medium" id="p10">
+						<designation>Parking Ramp J</designation>
+						<description>Usually used for medium sized aircraft</description>
+						<airlines />
+						<coordinates>
+							<latitude>48º 31' 33.88'' N</latitude>
+							<longitude>123º 1' 34.93'' W</longitude>
+							<altitude measured="amsl">121</altitude>
+						</coordinates>
+						<radius lengthUnit="Foot">32</radius>
+						<connectsToTaxiway xway="x06">
+							<coordinates>
+								<latitude>48º 31' 33.88'' N</latitude>
+								<longitude>123º 1' 33.01'' W</longitude>
+								<altitude measured="amsl">121</altitude>
+							</coordinates>
+						</connectsToTaxiway>
+					</parking>
+					<parking parkingType="Medium" id="p11">
+						<designation>Parking Ramp K</designation>
+						<description>Usually used for medium sized aircraft</description>
+						<airlines />
+						<coordinates>
+							<latitude>48º 31' 34.76'' N</latitude>
+							<longitude>123º 1' 35.12'' W</longitude>
+							<altitude measured="amsl">121</altitude>
+						</coordinates>
+						<radius lengthUnit="Foot">32</radius>
+						<connectsToTaxiway xway="x06">
+							<coordinates>
+								<latitude>48º 31' 34.77'' N</latitude>
+								<longitude>123º 1' 33.05'' W</longitude>
+								<altitude measured="amsl">121</altitude>
+							</coordinates>
+						</connectsToTaxiway>
+					</parking>
+					<parking parkingType="Medium" id="p12">
+						<designation>Parking Ramp L</designation>
+						<description>Usually used for medium sized aircraft</description>
+						<airlines />
+						<coordinates>
+							<latitude>48º 31' 36.61'' N</latitude>
+							<longitude>123º 1' 39.31'' W</longitude>
+							<altitude measured="amsl">121</altitude>
+						</coordinates>
+						<radius lengthUnit="Foot">32</radius>
+						<connectsToTaxiway xway="x07">
+							<coordinates>
+								<latitude>48º 31' 36.60'' N</latitude>
+								<longitude>123º 1' 37.70'' W</longitude>
+								<altitude measured="amsl">121</altitude>
+							</coordinates>
+						</connectsToTaxiway>
+					</parking>
+					<parking parkingType="Medium" id="p13">
+						<designation>Parking Ramp M</designation>
+						<description>Usually used for medium sized aircraft</description>
+						<airlines />
+						<coordinates>
+							<latitude>48º 31' 37.57'' N</latitude>
+							<longitude>123º 1' 39.35'' W</longitude>
+							<altitude measured="amsl">121</altitude>
+						</coordinates>
+						<radius lengthUnit="Foot">32</radius>
+						<connectsToTaxiway xway="x07">
+							<coordinates>
+								<latitude>48º 31' 37.57'' N</latitude>
+								<longitude>123º 1' 37.74'' W</longitude>
+								<altitude measured="amsl">121</altitude>
+							</coordinates>
+						</connectsToTaxiway>
+					</parking>
+					<parking parkingType="Medium" id="p14">
+						<designation>Parking Ramp N</designation>
+						<description>Usually used for medium sized aircraft</description>
+						<airlines />
+						<coordinates>
+							<latitude>48º 31' 38.46'' N</latitude>
+							<longitude>123º 1' 39.41'' W</longitude>
+							<altitude measured="amsl">121</altitude>
+						</coordinates>
+						<radius lengthUnit="Foot">32</radius>
+						<connectsToTaxiway xway="x07">
+							<coordinates>
+								<latitude>48º 31' 38.46'' N</latitude>
+								<longitude>123º 1' 37.78'' W</longitude>
+								<altitude measured="amsl">121</altitude>
+							</coordinates>
+						</connectsToTaxiway>
+					</parking>
+					<parking parkingType="Medium" id="p15">
+						<designation>Parking Ramp O</designation>
+						<description>Usually used for medium sized aircraft</description>
+						<airlines />
+						<coordinates>
+							<latitude>48º 31' 37.33'' N</latitude>
+							<longitude>123º 1' 34.99'' W</longitude>
+							<altitude measured="amsl">121</altitude>
+						</coordinates>
+						<radius lengthUnit="Foot">32</radius>
+						<connectsToTaxiway xway="x06">
+							<coordinates>
+								<latitude>48º 31' 37.33'' N</latitude>
+								<longitude>123º 1' 33.19'' W</longitude>
+								<altitude measured="amsl">121</altitude>
+							</coordinates>
+						</connectsToTaxiway>
+					</parking>
+					<parking parkingType="Medium" id="p16">
+						<designation>Parking Ramp P</designation>
+						<description>Usually used for medium sized aircraft</description>
+						<airlines />
+						<coordinates>
+							<latitude>48º 31' 38.12'' N</latitude>
+							<longitude>123º 1' 35.01'' W</longitude>
+							<altitude measured="amsl">121</altitude>
+						</coordinates>
+						<radius lengthUnit="Foot">32</radius>
+						<connectsToTaxiway xway="x06">
+							<coordinates>
+								<latitude>48º 31' 38.12'' N</latitude>
+								<longitude>123º 1' 33.23'' W</longitude>
+								<altitude measured="amsl">121</altitude>
+							</coordinates>
+						</connectsToTaxiway>
+					</parking>
+					<parking parkingType="Medium" id="p17">
+						<designation>Parking Ramp Q</designation>
+						<description>Usually used for medium sized aircraft</description>
+						<airlines />
+						<coordinates>
+							<latitude>48º 31' 46.46'' N</latitude>
+							<longitude>123º 1' 30.67'' W</longitude>
+							<altitude measured="amsl">121</altitude>
+						</coordinates>
+						<radius lengthUnit="Foot">32</radius>
+						<connectsToTaxiway xway="x08">
+							<coordinates>
+								<latitude>48º 31' 43.59'' N</latitude>
+								<longitude>123º 1' 30.37'' W</longitude>
+								<altitude measured="amsl">121</altitude>
+							</coordinates>
+						</connectsToTaxiway>
+					</parking>
+				</parkingSpaces>
+				<hangars>
+					<hangar id="g1">
+						<designation>Hangar 1</designation>
+						<description>Usually used to store bla bla</description>
+						<shape>
+							<vertex>
+								<latitude>41º 16' 43'' N</latitude>
+								<longitude>8º 30' 7'' W</longitude>
+							</vertex>
+							<vertex>
+								<latitude>41º 16' 43'' N</latitude>
+								<longitude>8º 30' 7'' W</longitude>
+							</vertex>
+							<vertex>
+								<latitude>41º 16' 43'' N</latitude>
+								<longitude>8º 30' 7'' W</longitude>
+							</vertex>
+							<height lengthUnit="Meter">7</height>
+							<usefulArea areaUnit="Square Meter">42</usefulArea>
+							<doors doorType="DualSideSlip">
+								<vertex>
+									<latitude>41º 16' 43'' N</latitude>
+									<longitude>8º 30' 7'' W</longitude>
+								</vertex>
+								<vertex>
+									<latitude>41º 16' 43'' N</latitude>
+									<longitude>8º 30' 7'' W</longitude>
+								</vertex>
+								<length lengthUnit="Meter">2</length>
+								<height lengthUnit="Meter">6</height>
+							</doors>
+						</shape>
+					</hangar>
+				</hangars>
+				<utilities>
+					<tower id="u01">
+						<designation>Tower</designation>
+						<coordinates>
+							<latitude>48º 31' 38.91'' N</latitude>
+							<longitude>123º 1' 35.56'' W</longitude>
+							<altitude measured="amsl">121</altitude>
+						</coordinates>
+						<radius lengthUnit="Meter">2.55</radius>
+						<height lengthUnit="Meter">129</height>
+					</tower>
+				</utilities>
+			</airport>
+		</baseOfOperations>
+	</bases>
+	<controllers>
+	</controllers>
+	<agentTypes>
+	</agentTypes>
+	<noFlyAreas>
+	</noFlyAreas>
+</scenario>

@@ -16,7 +16,7 @@ airport
 value
 :
 	STRING 
-; // Our STRING is AttEQUALS value in spec
+; 
 
 
  
@@ -44,7 +44,7 @@ com_type: TYPE EQUALS value;
 airport_close: OPEN SLASH AIRPORT CLOSE;
 airport_atr: region? country? state? city? name? lat lon alt magvar? ident airportTestRadius trafficScalar;
 
-airport_content: ( tower | services | com | runway | runwayAlias | (taxiwayPoint taxiwayParking taxiName taxiwayPath) | helipad)*;
+airport_content: ( tower | services | com | runway | runwayAlias | (taxiwayPoint taxiwayParking taxiName taxiwayPath) | helipad)+;
 
 tower: OPEN TOWER lat lon alt SLASH_CLOSE;
 
@@ -140,7 +140,7 @@ frequency: FREQUENCY EQUALS value;
 range: RANGE EQUALS value;
 backCourse: BACKCOURSE EQUALS value;
 
-ils_content: (glideSlope)* (dme)* (visualModel)*;
+ils_content: (glideSlope)* /*(dme)**/ (visualModel)*;
 glideSlope: OPEN GLIDESLOPE lat lon alt pitch range SLASH_CLOSE;
 dme: OPEN DME lat lon alt range SLASH_CLOSE;
 
