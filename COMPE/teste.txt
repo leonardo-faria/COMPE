@@ -35,9 +35,7 @@
          primaryPattern="LEFT"
          secondaryTakeoff="YES"
          secondaryLanding="YES"
-         secondaryPattern="LEFT"
-         primaryMarkingBias="12"
-         secondaryMarkingBias="12">
+         secondaryPattern="LEFT">
          <Markings
             alternateThreshold="FALSE"
             alternateTouchdown="FALSE"
@@ -68,11 +66,6 @@
             width="24.99M"
             surface="ASPHALT"
             />
-             <BlastPad
-            end="PRIMARY"
-            length="270.05M"
-            surface="CONCRETE"
-            />
          <Vasi
             end="PRIMARY"
             type="PAPI4"
@@ -90,7 +83,22 @@
             spacing="91.44M"
             pitch="3"/>
       </Runway>
-     
+      <Start
+         type="RUNWAY"
+         lat="41.5838118642569"
+         lon="-8.45294192433357"
+         alt="75.285M"
+         heading="62.4599990844727"
+         number="07"
+         designator="NONE"/>
+      <Start
+         type="RUNWAY"
+         lat="41.5876309946179"
+         lon="-8.44316616654396"
+         alt="75.285M"
+         heading="242.460006713867"
+         number="25"
+         designator="NONE"/>
       <Com
          frequency="122.0000"
          type="MULTICOM"

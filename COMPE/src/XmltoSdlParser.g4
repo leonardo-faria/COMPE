@@ -5,8 +5,13 @@ options {
 }
   
   
-startpoint: document;
-document: airport+;
+startpoint: document EOF;
+document:  xmlItems+;
+
+xmlItems
+:
+	  airport
+;
   
 airport   
 :
@@ -42,7 +47,7 @@ com_type: TYPE EQUALS value;
 
 
 airport_close: OPEN SLASH AIRPORT CLOSE;
-airport_atr: region? country? state? city? name? lat lon alt magvar? ident airportTestRadius trafficScalar;
+airport_atr: (region | country | state | city | name |  lat |  lon |  alt | magvar | ident | airportTestRadius | trafficScalar)+;
 
 airport_content: ( tower | services | com | runway | runwayAlias | (taxiwayPoint taxiwayParking taxiName taxiwayPath) | helipad)+;
 
@@ -68,7 +73,7 @@ runway: runway_open runway_content runway_close;
 runway_open: OPEN RUNWAY runway_atr CLOSE;
 runway_close: OPEN SLASH RUNWAY CLOSE;
 
-runway_atr: lat lon alt surface heading length width runway_number (designator | primaryDesignator | secondaryDesignator ) patternAltitude? primaryTakeoff? primaryLanding? primaryPattern? secondaryTakeoff? secondaryLanding? secondaryPattern? primaryMarkingBias secondaryMarkingBias;
+runway_atr: (lat | lon | alt | surface | heading | length | width | runway_number | (designator | primaryDesignator | secondaryDesignator ) | patternAltitude | primaryTakeoff | primaryLanding | primaryPattern | secondaryTakeoff | secondaryLanding | secondaryPattern | primaryMarkingBias | secondaryMarkingBias)+;
 surface: SURFACE EQUALS value;
 heading: HEADING EQUALS value;
 length: LENGTH EQUALS value;
@@ -90,7 +95,14 @@ secondaryMarkingBias: SECONDARYMARKINGBIAS EQUALS value;
 
 runway_content: (markings)* (lights)* (offsetThreshold)* (blastPad)* (overrun)* (approachLights)* (vasi)* (ils)* (runwayStart)*;
 
-markings: OPEN MARKINGS edges threshold fixedDistance touchdown dashes marking_ident precision edgePavement singleEnd primaryClosed secondaryClosed primaryStol secondaryStol SLASH_CLOSE;
+markings: OPEN MARKINGS (alternateThreshold | alternateTouchdown | alternateFixedDistance | alternatePrecision | leadingZeroIdent | noThresholdEndArrows | edges | threshold | fixedDistance | touchdown | dashes | marking_ident | precision | edgePavement | singleEnd | primaryClosed | secondaryClosed | primaryStol | secondaryStol)+ SLASH_CLOSE;
+
+alternateThreshold: ALTERNATETHRESHOLD EQUALS value;
+alternateTouchdown: ALTERNATETOUCHDOWN EQUALS value;
+alternateFixedDistance: ALTERNATEFIXEDDISTANCE EQUALS value;
+alternatePrecision: ALTERNATEPRECISION EQUALS value;
+leadingZeroIdent: LEADINGZEROIDENT EQUALS value;
+noThresholdEndArrows: NOTHRESHOLDENDARROWS EQUALS value;
 edges: EDGES EQUALS value;
 threshold: THRESHOLD EQUALS value;
 fixedDistance: FIXEDDISTANCE EQUALS value;
@@ -135,17 +147,17 @@ pitch: PITCH EQUALS value;
 
 ils: ils_open ils_content ils_close;
 
-ils_open: OPEN ILS lat lon alt heading frequency end (range)? magvar ident (width)? (name)? (backCourse)? CLOSE;
+ils_open: OPEN ILS lat lon alt heading frequency end range magvar ident width name backCourse CLOSE;
 frequency: FREQUENCY EQUALS value;
 range: RANGE EQUALS value;
 backCourse: BACKCOURSE EQUALS value;
 
 ils_content: (glideSlope)* /*(dme)**/ (visualModel)*;
-glideSlope: OPEN GLIDESLOPE lat lon alt pitch range SLASH_CLOSE;
+glideSlope: OPEN GLIDESLOPE (lat | lon | alt | pitch | range)+ SLASH_CLOSE;
 dme: OPEN DME lat lon alt range SLASH_CLOSE;
 
 visualModel: visualModel_open visualModel_content visualModel_close;
-visualModel_open: OPEN VISUALMODEL heading? imageComplexity? guid_name instanceId CLOSE;
+visualModel_open: OPEN VISUALMODEL (heading | imageComplexity | guid_name | instanceId)+ CLOSE;
 imageComplexity: IMAGECOMPLEXITY EQUALS value;
 guid_name: NAME EQUALS value;
 instanceId: INSTANCEID EQUALS value;
@@ -158,14 +170,14 @@ biasZ_xyz: BIASZ EQUALS value;
 visualModel_close: OPEN SLASH VISUALMODEL CLOSE;
 ils_close: OPEN SLASH ILS CLOSE;
 
-runwayStart: OPEN RUNWAYSTART runway_type lat lon alt heading end SLASH_CLOSE;
+runwayStart: OPEN RUNWAYSTART (runway_type | lat | lon | alt | heading end)+ SLASH_CLOSE;
 runway_type: TYPE EQUALS value;
 
 runwayAlias: OPEN RUNWAYALIAS runway_number designator SLASH_CLOSE;
 
 
 
-helipad: OPEN HELIPAD lat lon alt surface heading length width helipad_type closed? transparent? red? green? blue? SLASH_CLOSE;
+helipad: OPEN HELIPAD (lat | lon | alt | surface | heading | length | width | helipad_type | closed | transparent | red | green | blue)+ SLASH_CLOSE;
 
 helipad_type: TYPE EQUALS value;
 closed: CLOSED EQUALS value;
@@ -175,7 +187,7 @@ green: GREEN EQUALS value;
 blue: BLUE EQUALS value;
 
 
-taxiwayPoint: OPEN TAXIWAYPOINT index taxiway_type orientation? ((lat lon) | (biasX_xyz biasZ_xyz)) SLASH_CLOSE;
+taxiwayPoint: OPEN TAXIWAYPOINT (index | taxiway_type | orientation | ((lat lon) | (biasX_xyz biasZ_xyz)))+ SLASH_CLOSE;
 
 index: INDEX EQUALS value;
 taxiway_type: TYPE EQUALS value;
@@ -186,10 +198,10 @@ index255: INDEX EQUALS value;
 taxi_name: NAME EQUALS value;
 
 
-taxiwayPath: OPEN TAXIWAYPATH path_type path_start path_end width weightLimit surface drawSurface drawDetail (centerLine)? (centerLineLighted)? (leftEdge)? (leftEdgeLighted)? (rightEdge)? (rightEdgeLighted)? number designator path_name SLASH_CLOSE;
+taxiwayPath: OPEN TAXIWAYPATH (path_type | path_start | path_end | width | weightLimit | surface | drawSurface | drawDetail | centerLine | centerLineLighted | leftEdge | leftEdgeLighted | rightEdge | rightEdgeLighted | number | designator | path_name)+ SLASH_CLOSE;
 
 path_type:TYPE EQUALS value;
-path_start:START EQUALS value;
+path_start:PATHSTART EQUALS value;
 path_end:END EQUALS value;
 weightLimit:WHEIGHTLIMIT EQUALS value;
 drawSurface: DRAWSURFACE EQUALS value;
@@ -204,7 +216,7 @@ number:NUMBER EQUALS value;
 path_name:NAME EQUALS value;
 
 
-taxiwayParking: OPEN TAXIWAYPARKING index (lat lon | biasX biasZ) heading radius parking_type parking_name number SLASH_CLOSE;
+taxiwayParking: OPEN TAXIWAYPARKING (index | (lat lon | biasX biasZ) | heading | radius | parking_type | parking_name | number)+ SLASH_CLOSE;
 
 radius: RADIUS EQUALS value;
 parking_type: TYPE EQUALS value;

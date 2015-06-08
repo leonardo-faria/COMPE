@@ -236,9 +236,9 @@
       lon="-8.44999998807907"
       alt="75.285M"
       magvar="5.5"
-      trafficScalar="0.7"
-      airportTestRadius="5000.0M"
       ident="LPBR"
+      airportTestRadius="5000.0M"
+      trafficScalar="0.7"
       >
       <Services>
          <Fuel

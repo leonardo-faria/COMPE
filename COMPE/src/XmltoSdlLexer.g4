@@ -2,10 +2,16 @@ lexer grammar XmltoSdlLexer;
 
 S: [ \t\n\r]+ -> skip ;
 
+
+
 OPEN        :   '<'                     -> pushMode(INSIDE);
 mode INSIDE;
 
 WS: [ \t\n\r]+ -> skip ;
+
+
+
+
 
 AIRPORT: 'Airport';
 REGION: 'region';
@@ -44,6 +50,12 @@ SECONDARYPATTERN: 'secondaryPattern';
 PRIMARYMARKINGBIAS: 'primaryMarkingBias';
 SECONDARYMARKINGBIAS: 'secondaryMarkingBias';
 MARKINGS: 'Markings';
+ALTERNATETHRESHOLD: 'alternateThreshold';
+ALTERNATETOUCHDOWN: 'alternateTouchdown';
+ALTERNATEFIXEDDISTANCE: 'alternateFixedDistance';
+ALTERNATEPRECISION: 'alternatePrecision';
+LEADINGZEROIDENT: 'leadingZeroIdent';
+NOTHRESHOLDENDARROWS: 'noThresholdEndArrows';
 EDGES: 'edges';
 THRESHOLD: 'threshold';
 FIXEDDISTANCE: 'fixedDistance';
@@ -69,7 +81,7 @@ SYSTEM: 'system';
 STROBES: 'strobes';
 REIL: 'reil';
 ENDLIGHTS: 'endLights';
-VASI: 'vasi';
+VASI: 'Vasi';
 SIDE: 'side';
 BIASX: 'biasX';
 BIASY: 'biasY';
@@ -91,7 +103,7 @@ BIASY_xyz: 'biasY';
 BIASZ_xyz: 'biasZ';
 RUNWAYSTART: 'RunwayStart';
 RUNWAYALIAS: 'RunwayAlias';
-START: 'start';
+PATHSTART: 'start';
 INDEX: 'index';
 ORIENTATION: 'orientation';
 TAXIWAYPATH: 'TaxiwayPath';
@@ -116,6 +128,7 @@ GREEN:'green';
 BLUE:'blue';
 TAXIWAYPOINT:'TaxiwayPoint';
 
+
 CLOSE       :   '>'                     -> popMode ;
 SLASH_CLOSE :   '/>'                    -> popMode ;
 SLASH       :   '/' ;
@@ -125,8 +138,24 @@ STRING      :   '"' ~[<"]* '"'
             ;
 Name        :   NameStartChar NameChar* ;
 
+//ignoring
+APPROACH: ('<Approach' .*? '>' .*? '</Approach>')->skip; //new
+APRONS: ('<Aprons>' .*? '</Aprons>') ->skip;
+JETWAY:('<Jetway>' .*? '</Jetway>') ->skip; //new
+APRONEDGELIGHTS: ('<ApronEdgeLights>' .*? '</ApronEdgeLights>') ->skip;
+TAXIWAYSIGN:('<TaxiwaySign' .*? '/>') ->skip;
+BOUNDARYFENCE: ('<BoundaryFence' .*? '>' .*? '</BoundaryFence>')->skip;
+WAYPOINT:('<Waypoint' .*? '>' .*? '</Waypoint>')->skip; //new
+NDB: ('<Ndb' .*? '>' .*? '</Ndb>')->skip; //new
+START:('<Start' .*? '/>')->skip; //new
+BLASTFENCE: ('<BlastFence' .*? '>' .*? '</BlastFence>')->skip; //new
+DELETEAIRPORT: ('<DeleteAirport' .*? '>' .*? '</DeleteAirport>')->skip;//new
+//COM: ('<Com' .*? '/>')->skip; //new
 fragment
 DIGIT       :   [0-9] ;
+
+
+COMMENT: '<!--' .*? '-->' -> skip;
 
 NameChar    :   NameStartChar
             |   '-' | '_' | '.' | DIGIT 
