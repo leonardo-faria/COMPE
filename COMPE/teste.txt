@@ -950,7 +950,7 @@
          pushBack="BOTH"/>
       <TaxiName
          index="0"
-         name=""/>
+         name="Z"/>
       <TaxiName
          index="1"
          name="A"/>

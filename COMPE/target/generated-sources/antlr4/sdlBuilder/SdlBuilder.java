@@ -2,6 +2,7 @@ package sdlBuilder;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -35,11 +36,11 @@ public class SdlBuilder {
 	HashMap<String,HashMap<String,String>> helipad;
 	HashMap<String,HashMap<String,String>> taxiwayPoint;
 	HashMap<String,HashMap<String,String>> taxiwayParking;
-	HashMap<String,HashMap<String,String>> taxiwayPath;
+	HashMap<String, ArrayList<HashMap<String,String>>> taxiPathperName;
 	HashMap<String,HashMap<String,String>> taxiName;
 
 	Namespace ns;
-	
+
 	public SdlBuilder(HashMap<String, HashMap<String, String>> airportAttrs,
 			HashMap<String, HashMap<String, String>> fuels,
 			HashMap<String, HashMap<String, String>> coms,
@@ -60,7 +61,7 @@ public class SdlBuilder {
 			HashMap<String, HashMap<String, String>> helipad,
 			HashMap<String, HashMap<String, String>> taxiwayPoint,
 			HashMap<String, HashMap<String, String>> taxiwayParking,
-			HashMap<String, HashMap<String, String>> taxiwayPath,
+			HashMap<String, ArrayList<HashMap<String,String>>> taxiPathperName,
 			HashMap<String, HashMap<String, String>> taxiName) {
 		super();
 		this.airportAttrs = airportAttrs;
@@ -83,7 +84,7 @@ public class SdlBuilder {
 		this.helipad = helipad;
 		this.taxiwayPoint = taxiwayPoint;
 		this.taxiwayParking = taxiwayParking;
-		this.taxiwayPath = taxiwayPath;
+		this.taxiPathperName = taxiPathperName;
 		this.taxiName = taxiName;
 	}
 
@@ -133,43 +134,43 @@ public class SdlBuilder {
 		airport.addContent(new Element("magVar",ns).setText(airportAttrs.get("AIRPORT_"+baseIndex).get("magvar")));
 		Element runways = new Element("runways",ns);
 		for(int i = 0; i < runwayAttrs.size();i++){
-		runways.addContent(createRunway(runways, i));
+			runways.addContent(createRunway(runways, i));
 		}
 		airport.addContent(runways);
-		
+
 		Element helipads = new Element("helipads",ns);
 		for(int i = 0; i < helipad.size();i++){
 			helipads.addContent(createHelipad(i));
 		}
 		airport.addContent(helipads);
 		base.addContent(airport);
-		
+
 		Element taxiways = new Element("taxiways",ns);
 		for(int i = 0; i < taxiName.size();i++){
 			taxiways.addContent(createTaxiway(i));
 		}		
 		airport.addContent(taxiways);
-		
+
 		Element parkingspaces = new Element("parkingSpaces",ns);
 		for(int i = 0; i < taxiwayParking.size(); i++){
 			parkingspaces.addContent(createParking(i));
 		}
-		
-		
+
+
 		return airport;
 	}
 
 	private Element createParking(int index) {
 		Element parking = new Element("parking",ns).setAttribute(new Attribute("parkingType", taxiwayParking.get("AIRPORT_"+baseIndex + "-TAXIWAYPARKING_" + index).get("type")))
-		.setAttribute(new Attribute("id", "p"+taxiwayParking.get("AIRPORT_"+baseIndex + "-TAXIWAYPARKING_" + index).get("index")));
+				.setAttribute(new Attribute("id", "p"+taxiwayParking.get("AIRPORT_"+baseIndex + "-TAXIWAYPARKING_" + index).get("index")));
 		parking.addContent(new Element("designation",ns).setText("Parking" + taxiwayParking.get("AIRPORT_"+baseIndex + "-TAXIWAYPARKING_" + index).get("index")));
 		parking.addContent(new Element("description",ns).setText("Parking" + taxiwayParking.get("AIRPORT_"+baseIndex + "-TAXIWAYPARKING_" + index).get("type")));
 		Element airlines = new Element("airlines",ns).setText(taxiwayParking.get("AIRPORT_"+baseIndex + "-TAXIWAYPARKING_" + index).get("airlineCodes"));
 		parking.addContent(airlines);
-		
+
 		taxiwayParking.get("AIRPORT_"+baseIndex + "-TAXIWAYPARKING_" + index).put("alt", "48");
 		parking.addContent(createCoords(taxiwayParking.get("AIRPORT_"+baseIndex + "-TAXIWAYPARKING_" + index)));
-		
+
 		Element radius = new Element("radius",ns);
 		String s = taxiwayParking.get("AIRPORT_"+baseIndex + "-TAXIWAYPARKING_" + index).get("radius");
 		if(s.charAt(s.length()-1) == 'M')
@@ -179,20 +180,19 @@ public class SdlBuilder {
 		String val = s.substring(0, s.length() - 1);
 		radius.setText(val);
 		parking.addContent(radius);
-		
 
-		
-		
-		return null;
+		return parking;
 	}
 
 	private Element createTaxiway(int index) {
 		Element taxiway = new Element("taxiway",ns).setAttribute(new Attribute("id", "x"+taxiName.get("AIRPORT_"+baseIndex + "-TAXINAME_" + index).get("index")));
-		taxiway.addContent(new Element("designation",ns).setText("Taxiway" + taxiName.get("AIRPORT_"+baseIndex + "-TAXINAME_" + index).get("name")));
-		taxiway.addContent(new Element("surface",ns).setText(taxiwayPath.get("AIRPORT_"+baseIndex + "-TAXIWAYPATH_" + 0 + "_" + index).get("surface")));
-		
+		taxiway.addContent(new Element("designation",ns).setText("Taxiway " + taxiName.get("AIRPORT_"+baseIndex + "-TAXINAME_" + index).get("name")));
+		System.out.println("AIRPORT_"+baseIndex + "-TAXINAME_" + index+":");
+		System.out.println(taxiPathperName.get("AIRPORT_"+baseIndex + "-TAXINAME_" + index).size());
+		taxiway.addContent(new Element("surface",ns).setText(taxiPathperName.get("AIRPORT_"+baseIndex + "-TAXINAME_" + index).get(0).get("surface")));
+
 		Element width = new Element("width",ns);
-		String s = taxiwayPath.get("AIRPORT_"+baseIndex + "-TAXIWAYPATH_" + 0 + "_" + index).get("width");
+		String s = taxiPathperName.get("AIRPORT_"+baseIndex + "-TAXINAME_" + index).get(0).get("width");
 		if(s.charAt(s.length()-1) == 'M')
 			width.setAttribute("lengthUnit","Meter");
 		else
@@ -200,30 +200,30 @@ public class SdlBuilder {
 		String val = s.substring(0, s.length() - 1);
 		width.setText(val);
 		taxiway.addContent(width);
-		
+
 		Element path = new Element("path",ns);
 		Element startpoint = new Element("startpoint",ns);
-		startpoint.addContent(createCoords(taxiwayPath.get("AIRPORT_"+baseIndex + "-TAXIWAYPATH_" + 0 + "_" + index)));
+		startpoint.addContent(createCoords(taxiPathperName.get("AIRPORT_"+baseIndex + "-TAXINAME_" + index).get(0)));
 		Element connects = new Element("connectsTo",ns);
-		connects.addContent(new Element("rway",ns).setAttribute(new Attribute("idr", taxiwayPath.get("AIRPORT_"+baseIndex + "-TAXIWAYPATH_" + 0 + "_" + index).get("end"))));
+		connects.addContent(new Element("rway",ns).setAttribute(new Attribute("idr", taxiPathperName.get("AIRPORT_"+baseIndex + "-TAXINAME_" + index).get(0).get("end"))));
 		path.addContent(startpoint);
-		
-		for(int i = 1; i < taxiwayPath.size()-1;i++){
+
+		for(int i = 1; i < taxiPathperName.get("AIRPORT_"+baseIndex + "-TAXINAME_" + index).size()-1;i++){
 			Element midpoint = new Element("midpoint",ns);
-			midpoint.addContent(createCoords(taxiwayPath.get("AIRPORT_"+baseIndex + "-TAXIWAYPATH_" + i + "_" + index)));
+			midpoint.addContent(createCoords(taxiPathperName.get("AIRPORT_"+baseIndex + "-TAXINAME_" + index).get(i)));
 			Element connectsm = new Element("connectsTo",ns);
-			connectsm.addContent(new Element("rway",ns).setAttribute(new Attribute("idr", taxiwayPath.get("AIRPORT_"+baseIndex + "-TAXIWAYPATH_" + i + "_" + index).get("end"))));
+			connectsm.addContent(new Element("rway",ns).setAttribute(new Attribute("idr", taxiPathperName.get("AIRPORT_"+baseIndex + "-TAXINAME_" + index).get(i).get("end"))));
 			path.addContent(midpoint);			
 		}
-		
+
 		Element endpoint = new Element("endpoint",ns);
-		endpoint.addContent(createCoords(taxiwayPath.get("AIRPORT_"+baseIndex + "-TAXIWAYPATH_" + (taxiwayPath.size()-1) + "_" + index)));
+		endpoint.addContent(createCoords(taxiPathperName.get("AIRPORT_"+baseIndex + "-TAXINAME_" + index).get(taxiPathperName.get("AIRPORT_"+baseIndex + "-TAXINAME_" + index).size()-1)));
 		Element connectsm = new Element("connectsTo",ns);
-		connectsm.addContent(new Element("rway",ns).setAttribute(new Attribute("idr", taxiwayPath.get("AIRPORT_"+baseIndex + "-TAXIWAYPATH_" + (taxiwayPath.size()-1) + "_" + index).get("end"))));
+		connectsm.addContent(new Element("rway",ns).setAttribute(new Attribute("idr",taxiPathperName.get("AIRPORT_"+baseIndex + "-TAXINAME_" + index).get(taxiPathperName.get("AIRPORT_"+baseIndex + "-TAXINAME_" + index).size()-1).get("end"))));
 		path.addContent(endpoint);	
-				
+
 		taxiway.addContent(path);
-		
+
 		return taxiway;
 	}
 
@@ -241,7 +241,7 @@ public class SdlBuilder {
 		runway.addContent(createCoords(runwayAttrs.get("AIRPORT_"+baseIndex + "-RUNWAY_" + index)));
 		createLenWid(runwayAttrs.get("AIRPORT_"+baseIndex + "-RUNWAY_" + index), runway);
 		runway.addContent(new Element("surface",ns).setText(runwayAttrs.get("AIRPORT_"+baseIndex + "-RUNWAY_" + index).get("surface")));
-		
+
 		Element baseend = new Element("baseEnd",ns);
 		baseend.addContent(new Element("designation",ns).setText(runwayAttrs.get("AIRPORT_"+baseIndex + "-RUNWAY_" + index).get("number")));
 		Element startpoint = new Element("startpoint",ns);
@@ -258,7 +258,7 @@ public class SdlBuilder {
 		.setAttribute(new Attribute("idr", "x01"))));
 		baseend.addContent(endpoint);
 		runway.addContent(baseend);
-		
+
 		Element reciprocalEnd = new Element("reciprocalEnd",ns);
 		reciprocalEnd.addContent(new Element("designation",ns).setText("" + (Integer.parseInt(runwayAttrs.get("AIRPORT_"+baseIndex + "-RUNWAY_" + index).get("number")) + 18 )));
 		Element rstartpoint = new Element("startpoint",ns);
@@ -274,12 +274,12 @@ public class SdlBuilder {
 		.addContent(new Element("xway",ns)
 		.setAttribute(new Attribute("idr", "x01"))));
 		reciprocalEnd.addContent(rendpoint);
-		
+
 		runway.addContent(reciprocalEnd);
 		return runway;
-		
+
 	}
-	
+
 	private void createLenWid(HashMap<String,String> map, Element runway){
 		Element length = new Element("length",ns);
 		String s = map.get("length");
@@ -290,7 +290,7 @@ public class SdlBuilder {
 		String val = s.substring(0, s.length() - 1);
 		length.setText(val);
 		runway.addContent(length);
-		
+
 		Element width = new Element("width",ns);
 		s = map.get("width");
 		if(s.charAt(s.length()-1) == 'M')
@@ -350,12 +350,12 @@ public class SdlBuilder {
 		cp.addContent(new Element("city",ns).setText(airportAttrs.get("AIRPORT_"+baseIndex).get("city")));
 		cp.addContent(new Element("stateDistrictRegion",ns).setText(airportAttrs.get("AIRPORT_"+baseIndex).get("state")));
 		cp.addContent(new Element("country",ns).setText(airportAttrs.get("AIRPORT_"+baseIndex).get("country")));
-		
+
 		cp.addContent(createCoords(airportAttrs.get("AIRPORT_"+baseIndex)));
 
 		return cp;
 	}
-	
+
 	private Element createCoords(HashMap<String,String> map){
 		Element coord = new Element("coordinates",ns);
 		coord.addContent(new Element("latitude",ns).setText(map.get("lat")));
@@ -363,13 +363,13 @@ public class SdlBuilder {
 		coord.addContent(new Element("altitude",ns).setAttribute("measured", "amsl").setText(map.get("alt")));
 		return coord;
 	}
-	
+
 
 	public void createScenario(Document doc) {
 		ns = Namespace.getNamespace("dcs:scenario"); 
 		Element scenario = new Element("scenario",ns);
 		scenario.addNamespaceDeclaration(Namespace.getNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance"));
-        scenario.addNamespaceDeclaration(Namespace.getNamespace("xsd", "http://www.w3.org/2001/XMLSchema"));
+		scenario.addNamespaceDeclaration(Namespace.getNamespace("xsd", "http://www.w3.org/2001/XMLSchema"));
 		doc.setRootElement(scenario);
 	}
 
