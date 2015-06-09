@@ -4,6 +4,6 @@
 	<classpathentry kind="src" path="target/generated-sources/antlr4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="lib" path="C:/Users/Ze/AppData/Local/Temp/antlr-4.4-complete.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Ze/Desktop/jdom/jdom-2.0.6.jar"/>
+	<classpathentry kind="lib" path="jdom/jdom-2.0.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

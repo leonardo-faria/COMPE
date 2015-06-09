@@ -178,7 +178,7 @@ public class SdlBuilder {
 		airport.addContent(parkingspaces);
 		airport.addContent(new Element("hangars",ns));
 
-		Element utilities = new Element("utilities",ns);
+		Element utilities = new Element("utilities",ns); 
 		while(taxiwayParking.get("AIRPORT_" + airportIndex + "-TOWER_" + utilitiesIndex) != null){
 			utilities.addContent(createTower(utilitiesIndex));
 			utilitiesIndex++;
