@@ -314,7 +314,7 @@ public class MyListener extends XmltoSdlParserBaseListener {
 
 		//state
 		if(ctx.state().size() == 0){
-			attrs.put("state", "");
+			attrs.put("state", " ");
 		}
 		else if(ctx.state().size() > 1){
 			System.out.println("Duplicate attribute state");
@@ -337,7 +337,7 @@ public class MyListener extends XmltoSdlParserBaseListener {
 
 		//city
 		if(ctx.city().size() == 0){
-			attrs.put("city", "");
+			attrs.put("city", " ");
 		}
 		else if(ctx.city().size() > 1){
 			System.out.println("Duplicate attribute city");
@@ -360,7 +360,7 @@ public class MyListener extends XmltoSdlParserBaseListener {
 
 		//name
 		if(ctx.name().size() == 0){
-			attrs.put("name", "");
+			attrs.put("name", " ");
 		}
 		else if(ctx.name().size() > 1){
 			System.out.println("Duplicate attribute name");
@@ -3604,7 +3604,7 @@ public class MyListener extends XmltoSdlParserBaseListener {
 				tp.put("designator", val);
 		}
 
-		//designator
+		//name
 		if(ctx.path_name().size() == 0){
 			if(tp.get("type").equals("RUNWAY")){
 				System.out.println("Missing component path_name in number");
@@ -3634,7 +3634,7 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			} 
 		}
 
-		taxiwayPath.put("AIRPORT_" + airportIndex + "-TAXIWAYPATH_" + taxiwayPathIndex, tp);
+		taxiwayPath.put("AIRPORT_" + airportIndex + "-TAXIWAYPATH_" + taxiwayPathIndex + "_" + tp.get("name"), tp);
 	}
 
 	@Override
@@ -3684,7 +3684,8 @@ public class MyListener extends XmltoSdlParserBaseListener {
 	@Override
 	public void exitDocument(@NotNull XmltoSdlParser.DocumentContext ctx){
 		if(canBuildSdl){
-			SdlBuilder.build();
+			SdlBuilder builder = new SdlBuilder(airportAttrs, fuels, coms, runwayAttrs, markings, lights, offsetThreshold, blastPads, overRuns, approachLights, vasi, ils, glideSlope, visualModel, dme, runwayStart, runwayAlias, helipad, taxiwayPoint, taxiwayParking, taxiwayPath, taxiName);
+			builder.build();
 		}
 		else
 			System.out.println("Errors found, sdl file could not be built");
