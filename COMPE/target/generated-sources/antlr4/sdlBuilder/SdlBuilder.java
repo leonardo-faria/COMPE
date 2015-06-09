@@ -167,7 +167,18 @@ public class SdlBuilder {
 		Element airlines = new Element("airlines",ns).setText(taxiwayParking.get("AIRPORT_"+baseIndex + "-TAXIWAYPARKING_" + index).get("airlineCodes"));
 		parking.addContent(airlines);
 		
+		taxiwayParking.get("AIRPORT_"+baseIndex + "-TAXIWAYPARKING_" + index).put("alt", "48");
+		parking.addContent(createCoords(taxiwayParking.get("AIRPORT_"+baseIndex + "-TAXIWAYPARKING_" + index)));
 		
+		Element radius = new Element("radius",ns);
+		String s = taxiwayParking.get("AIRPORT_"+baseIndex + "-TAXIWAYPARKING_" + index).get("radius");
+		if(s.charAt(s.length()-1) == 'M')
+			radius.setAttribute("lengthUnit","Meter");
+		else
+			radius.setAttribute("lengthUnit","Feet");
+		String val = s.substring(0, s.length() - 1);
+		radius.setText(val);
+		parking.addContent(radius);
 		
 
 		
