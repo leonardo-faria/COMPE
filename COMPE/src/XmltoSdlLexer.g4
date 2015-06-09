@@ -5,6 +5,7 @@ S: [ \t\n\r]+ -> skip ;
 
 COMMENT     :   '<!--' .*? '-->'  -> skip;
 
+XML:('<?xml' .*? '?>')->skip;
 MARKER:('<Marker' .*? '/>')->skip;
 FSDATAO:('<FSData' .*? '>')->skip;
 FSDATAC:('</FSData>')->skip;

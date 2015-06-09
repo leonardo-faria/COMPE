@@ -38,7 +38,13 @@ public class Starter {
 		ParseTreeWalker walker = new ParseTreeWalker(); // create standard walker
 
 		MyListener extractor = new MyListener();
-		walker.walk(extractor, tree); // initiate walk of tree with listener
+		try{
+			walker.walk(extractor, tree); // initiate walk of tree with listener
+		}
+		catch(Exception e)
+		{
+			System.out.println("Failed to compile :(");
+		}
 	}
 
 }
