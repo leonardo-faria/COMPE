@@ -123,6 +123,17 @@
             width="3.53136157989502"
             name="CAT II ILS/DME 17"
             backCourse="TRUE">
+            <GlideSlope
+               lat="41.2581584975123"
+               lon="-8.68256404995918"
+               alt="69.494M"
+               pitch="2.72"
+               range="50017.0M"/>
+            <Dme
+               lat="41.2581584975123"
+               lon="-8.68256404995918"
+               alt="69.494M"
+               range="50017.0M"/>
          </Ils>
       </Runway>
       
