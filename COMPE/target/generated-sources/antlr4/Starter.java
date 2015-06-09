@@ -37,7 +37,7 @@ public class Starter {
 
 		ParseTreeWalker walker = new ParseTreeWalker(); // create standard walker
 
-		MyListener extractor = new MyListener();
+		MyListener extractor = new MyListener(args[1]);
 		try{
 			walker.walk(extractor, tree); // initiate walk of tree with listener
 		}

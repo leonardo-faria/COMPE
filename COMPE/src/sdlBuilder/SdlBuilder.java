@@ -21,6 +21,7 @@ public class SdlBuilder {
 	int taxiwayIndex;
 	int parkingspaceIndex;
 	int utilitiesIndex;
+	String outputFile;
 
 	HashMap<String,HashMap<String,String>> airportAttrs;
 	HashMap<String,HashMap<String,String>> fuels;
@@ -48,7 +49,7 @@ public class SdlBuilder {
 
 	Namespace ns;
 
-	public SdlBuilder(HashMap<String, HashMap<String, String>> airportAttrs,
+	public SdlBuilder(String file,HashMap<String, HashMap<String, String>> airportAttrs,
 			HashMap<String, HashMap<String, String>> towers,
 			HashMap<String, HashMap<String, String>> fuels,
 			HashMap<String, HashMap<String, String>> coms,
@@ -72,6 +73,7 @@ public class SdlBuilder {
 			HashMap<String, ArrayList<HashMap<String,String>>> taxiPathperName,
 			HashMap<String, HashMap<String, String>> taxiName) {
 		super();
+		this.outputFile = file;
 		this.airportAttrs = airportAttrs;
 		this.towers = towers;
 		this.fuels = fuels;
@@ -130,7 +132,7 @@ public class SdlBuilder {
 			// display nice
 			xmlOutput.setFormat(Format.getPrettyFormat());
 			//xmlOutput.setFormat(xmlOutput.getFormat().setExpandEmptyElements(true));
-			xmlOutput.output(doc, new FileWriter("SDLOutput.xml"));
+			xmlOutput.output(doc, new FileWriter(outputFile));
 
 			System.out.println("File Saved!");
 		} catch (IOException io) {

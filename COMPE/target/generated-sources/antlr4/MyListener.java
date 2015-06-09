@@ -7,7 +7,13 @@ import org.antlr.v4.runtime.misc.NotNull;
 
 import sdlBuilder.SdlBuilder;
 
-public class MyListener extends XmltoSdlParserBaseListener {	
+public class MyListener extends XmltoSdlParserBaseListener {
+	String outputFile;
+	public MyListener(String outputFile){
+		this.outputFile = outputFile;
+	}
+	
+	
 	XmltoSdlParser.ValueContext value;
 
 	HashMap<String,HashMap<String,String>> airportAttrs;
@@ -3791,7 +3797,7 @@ public class MyListener extends XmltoSdlParserBaseListener {
 	@Override
 	public void exitDocument(@NotNull XmltoSdlParser.DocumentContext ctx){
 		if(canBuildSdl){
-			SdlBuilder builder = new SdlBuilder(airportAttrs, towers,fuels, coms, runwayAttrs, markings, lights, offsetThreshold, blastPads, overRuns, approachLights, vasi, ils, glideSlope, visualModel, dme, runwayStart, runwayAlias, helipad, taxiwayPoint, taxiwayParking, taxiPathperName, taxiName);
+			SdlBuilder builder = new SdlBuilder(outputFile,airportAttrs, towers,fuels, coms, runwayAttrs, markings, lights, offsetThreshold, blastPads, overRuns, approachLights, vasi, ils, glideSlope, visualModel, dme, runwayStart, runwayAlias, helipad, taxiwayPoint, taxiwayParking, taxiPathperName, taxiName);
 			builder.build();
 		}
 		else
