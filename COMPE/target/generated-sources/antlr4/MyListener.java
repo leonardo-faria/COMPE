@@ -12,6 +12,7 @@ public class MyListener extends XmltoSdlParserBaseListener {
 
 	HashMap<String,HashMap<String,String>> airportAttrs;
 	HashMap<String,HashMap<String,String>> fuels;
+	HashMap<String,HashMap<String,String>> towers;
 	HashMap<String,HashMap<String,String>> coms;
 	HashMap<String,HashMap<String,String>> runwayAttrs;
 	HashMap<String,HashMap<String,String>> markings;
@@ -30,7 +31,6 @@ public class MyListener extends XmltoSdlParserBaseListener {
 	HashMap<String,HashMap<String,String>> helipad;
 	HashMap<String,HashMap<String,String>> taxiwayPoint;
 	HashMap<String,HashMap<String,String>> taxiwayParking;
-	//HashMap<String,HashMap<String,String>> taxiwayPath;
 	HashMap<String,HashMap<String,String>> taxiName;
 	HashMap<String, ArrayList<HashMap<String,String>>> taxiPathperName;
 
@@ -55,15 +55,17 @@ public class MyListener extends XmltoSdlParserBaseListener {
 	int taxiwayParkingIndex;
 	int taxiwayPathIndex;
 	int taxiNameIndex;
+	int towerIndex;
 	int helipadIndex;
 	boolean canBuildSdl = true;
 
 
 	@Override
-	public void enterXmlItems(@NotNull XmltoSdlParser.XmlItemsContext ctx){
+	public void enterDocument(@NotNull XmltoSdlParser.DocumentContext ctx){
 		taxiPathperName = new HashMap<String, ArrayList<HashMap<String,String>>>();
+		towers = new HashMap<String,HashMap<String,String>>();
 		taxiName = new HashMap<String,HashMap<String,String>>();
-//		taxiwayPath = new HashMap<String,HashMap<String,String>>();
+		//		taxiwayPath = new HashMap<String,HashMap<String,String>>();
 		taxiwayParking = new HashMap<String,HashMap<String,String>>();
 		taxiwayPoint = new HashMap<String,HashMap<String,String>>();
 		helipad = new HashMap<String,HashMap<String,String>>();
@@ -99,6 +101,7 @@ public class MyListener extends XmltoSdlParserBaseListener {
 		taxiwayParkingIndex = -1;
 		taxiwayPathIndex = -1;
 		taxiNameIndex = -1;
+		towerIndex = -1;
 	}
 
 	@Override
@@ -201,6 +204,11 @@ public class MyListener extends XmltoSdlParserBaseListener {
 
 
 	@Override
+	public void enterTower(@NotNull XmltoSdlParser.TowerContext ctx){
+		towerIndex++;
+	}
+
+	@Override
 	public void enterTaxiwayPoint(@NotNull XmltoSdlParser.TaxiwayPointContext ctx){
 		taxiwayPointIndex++;
 	}
@@ -246,7 +254,6 @@ public class MyListener extends XmltoSdlParserBaseListener {
 	{ 
 
 		HashMap<String,String> attrs = new HashMap<String,String>();
-
 		//ident
 		if(ctx.ident().size() == 0){
 			System.out.println("Missing component ident");
@@ -546,7 +553,7 @@ public class MyListener extends XmltoSdlParserBaseListener {
 		}
 
 
-		airportAttrs.put("AIRPORT_" + airportIndex , attrs);		
+		airportAttrs.put("AIRPORT_" + airportIndex , attrs);
 	}
 
 	@Override
@@ -587,6 +594,82 @@ public class MyListener extends XmltoSdlParserBaseListener {
 		}
 
 		fuels.put("AIRPORT_" + airportIndex + "-FUEL_" + fuelsIndex, fuel);		
+	}
+
+
+	@Override
+	public void exitTower(@NotNull XmltoSdlParser.TowerContext ctx){
+		
+		HashMap<String, String> t = new HashMap<String, String>();
+		
+		//lat
+		try{
+			value = ctx.lat().value();
+
+			float val = Float.parseFloat(value.getText().split("\"")[1]);
+
+			if (val < -90.0 || val > 90) {
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + val);
+
+				canBuildSdl = false;
+			}
+			else
+				t.put("lat", ""+val);		
+
+		} catch (NumberFormatException e) {
+			System.out.println("Line " + value.getStart().getLine()
+					+ ": invalid " + value.getText());
+			canBuildSdl = false;
+
+		} catch (NullPointerException e) {
+			System.out.println("Missing component lat in Tower");
+			canBuildSdl = false;
+		}
+
+
+		//lon
+		try {
+			value = ctx.lon().value();
+			float val = Float.parseFloat(value.getText().split("\"")[1]);
+
+			if (val < -180.0 || val > 180) {
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + val);
+
+				canBuildSdl = false;
+			}
+			else
+				t.put("lon", ""+val);		
+
+		} catch (NumberFormatException e) {
+			System.out.println("Line " + value.getStart().getLine()
+					+ ": invalid " + value.getText());
+			canBuildSdl = false;
+		} catch (NullPointerException e) {
+			System.out.println("Missing component lon in Tower");
+			canBuildSdl = false;
+		}
+
+
+		//alt
+		try{
+			value = ctx.alt().value();
+			String str = value.getText().split("\"")[1];
+			String s;
+			if((s = checkStringSuffix(str)) == ""){
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + value.getText());
+				canBuildSdl = false;
+			}
+			else
+				t.put("alt", str);
+		} catch (NullPointerException e) {
+			System.out.println("Missing component alt in Tower");
+			canBuildSdl = false;
+		}
+
+		towers.put("AIRPORT_" + airportIndex + "-TOWER_" + towerIndex, t);
 	}
 
 	@Override
@@ -2897,7 +2980,8 @@ public class MyListener extends XmltoSdlParserBaseListener {
 		//index
 		try{
 			value = ctx.index().value();
-			float val = Float.parseFloat(value.getText().split("\"")[1]);
+			String s = value.getText().split("\"")[1];
+			float val = Float.parseFloat(s);
 
 			if (val < 0 || val > 3999) {
 				System.out.println("Line " + value.getStart().getLine()
@@ -2906,16 +2990,14 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			}
 			else {
 				boolean  passed = true;
-				for(int i = 0; i < taxiwayPoint.size();i++){
-					if(taxiwayPoint.get("AIRPORT_" + airportIndex + "-TAXIWAYPOINT_" + i).get("index").equals("" + val)){
-						System.out.println("TaxiwayPoint index must be unique. Line " + value.getStart().getLine());
-						canBuildSdl = false;
-						passed = false;
-					}
-				}
+				if(taxiwayPoint.containsKey("AIRPORT_" + airportIndex + "-TAXIWAYPOINT_" + s)){
+					System.out.println("TaxiwayPoint index must be unique. Line " + value.getStart().getLine());
+					canBuildSdl = false;
+					passed = false;
 
+				}
 				if(passed)
-					tp.put("index", "" + val);				
+					tp.put("index", ""+val);				
 			}
 		} catch (NumberFormatException e) {
 			System.out.println("Line " + value.getStart().getLine()
@@ -3012,7 +3094,7 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			}
 		}
 
-		taxiwayPoint.put("AIRPORT_" + airportIndex + "-TAXIWAYPOINT_" + taxiwayPointIndex, tp);
+		taxiwayPoint.put("AIRPORT_" + airportIndex + "-TAXIWAYPOINT_" + tp.get("index"), tp);
 	}
 
 	@Override
@@ -3653,11 +3735,11 @@ public class MyListener extends XmltoSdlParserBaseListener {
 		}
 		if(!taxiPathperName.containsKey("AIRPORT_" + airportIndex + "-TAXINAME_"+tp.get("name"))){
 			taxiPathperName.put("AIRPORT_" + airportIndex + "-TAXINAME_"+tp.get("name"), new ArrayList<HashMap<String,String>>());
-			
+
 		}
 		if(!taxiPathperName.get("AIRPORT_" + airportIndex + "-TAXINAME_"+tp.get("name")).add(tp))
 			System.out.println("fail");
-//		taxiwayPath.put("AIRPORT_" + airportIndex + "-TAXIWAYPATH_" + taxiwayPathIndex, tp);
+		//		taxiwayPath.put("AIRPORT_" + airportIndex + "-TAXIWAYPATH_" + taxiwayPathIndex, tp);
 	}
 
 	@Override
@@ -3701,7 +3783,7 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			System.out.println("Missing component taxiName name");
 			canBuildSdl = false;
 		}
-		
+
 		taxiName.put("AIRPORT_" + airportIndex + "-TAXINAME_" + taxiNameIndex, tn);
 	}
 
@@ -3709,7 +3791,7 @@ public class MyListener extends XmltoSdlParserBaseListener {
 	@Override
 	public void exitDocument(@NotNull XmltoSdlParser.DocumentContext ctx){
 		if(canBuildSdl){
-			SdlBuilder builder = new SdlBuilder(airportAttrs, fuels, coms, runwayAttrs, markings, lights, offsetThreshold, blastPads, overRuns, approachLights, vasi, ils, glideSlope, visualModel, dme, runwayStart, runwayAlias, helipad, taxiwayPoint, taxiwayParking, taxiPathperName, taxiName);
+			SdlBuilder builder = new SdlBuilder(airportAttrs, towers,fuels, coms, runwayAttrs, markings, lights, offsetThreshold, blastPads, overRuns, approachLights, vasi, ils, glideSlope, visualModel, dme, runwayStart, runwayAlias, helipad, taxiwayPoint, taxiwayParking, taxiPathperName, taxiName);
 			builder.build();
 		}
 		else

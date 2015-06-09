@@ -3,6 +3,27 @@ lexer grammar XmltoSdlLexer;
 S: [ \t\n\r]+ -> skip ;
 
 
+COMMENT     :   '<!--' .*? '-->'  -> skip;
+
+MARKER:('<Marker' .*? '/>')->skip;
+FSDATAO:('<FSData' .*? '>')->skip;
+FSDATAC:('</FSData>')->skip;
+
+SCENERYOBJECT: ('<SceneryObject' .*? '>' .*? '</SceneryObject>') ->skip;
+
+APPROACH: ('<Approach' .*? '>' .*? '</Approach>')->skip;
+APRONS: ('<Aprons>' .*? '</Aprons>') ->skip;
+JETWAY:'<Jetway>' .*? '</Jetway>' ->skip; 
+APRONEDGELIGHTS: ('<ApronEdgeLights>' .*? '</ApronEdgeLights>') ->skip;
+TAXIWAYSIGN:('<TaxiwaySign' .*? '/>') ->skip;
+BOUNDARYFENCE: ('<BoundaryFence' .*? '>' .*? '</BoundaryFence>')->skip;
+WAYPOINT:('<Waypoint' .*? '>' .*? '</Waypoint>')->skip; 
+NDB: ('<Ndb' .*? '>' .*? '</Ndb>')->skip;
+START:('<Start' .*? '/>')->skip;
+BLASTFENCE: ('<BlastFence' .*? '>' .*? '</BlastFence>')->skip; 
+DELETEAIRPORT: ('<DeleteAirport' .*? '>' .*? '</DeleteAirport>')->skip;
+COM2: ('<Com' .*? '/>')->skip;
+
 
 OPEN        :   '<'                     -> pushMode(INSIDE);
 mode INSIDE;
@@ -144,24 +165,10 @@ STRING      :   '"' ~[<"]* '"'
             ;
 Name        :   NameStartChar NameChar* ;
 
-//ignoring
-APPROACH: ('<Approach' .*? '>' .*? '</Approach>')->skip; //new
-APRONS: ('<Aprons>' .*? '</Aprons>') ->skip;
-JETWAY:('<Jetway>' .*? '</Jetway>') ->skip; //new
-APRONEDGELIGHTS: ('<ApronEdgeLights>' .*? '</ApronEdgeLights>') ->skip;
-TAXIWAYSIGN:('<TaxiwaySign' .*? '/>') ->skip;
-BOUNDARYFENCE: ('<BoundaryFence' .*? '>' .*? '</BoundaryFence>')->skip;
-WAYPOINT:('<Waypoint' .*? '>' .*? '</Waypoint>')->skip; //new
-NDB: ('<Ndb' .*? '>' .*? '</Ndb>')->skip; //new
-START:('<Start' .*? '/>')->skip; //new
-BLASTFENCE: ('<BlastFence' .*? '>' .*? '</BlastFence>')->skip; //new
-DELETEAIRPORT: ('<DeleteAirport' .*? '>' .*? '</DeleteAirport>')->skip;//new
-//COM: ('<Com' .*? '/>')->skip; //new
+//ignoring	
 fragment
 DIGIT       :   [0-9] ;
 
-
-COMMENT: '<!--' .*? '-->' -> skip;
 
 NameChar    :   NameStartChar
             |   '-' | '_' | '.' | DIGIT 
