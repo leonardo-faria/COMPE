@@ -4,6 +4,8 @@ import java.util.regex.Pattern;
 
 import org.antlr.v4.runtime.misc.NotNull;
 
+import sdlBuilder.SdlBuilder;
+
 public class MyListener extends XmltoSdlParserBaseListener {	
 	XmltoSdlParser.ValueContext value;
 
@@ -18,8 +20,17 @@ public class MyListener extends XmltoSdlParserBaseListener {
 	HashMap<String,HashMap<String,String>> overRuns;
 	HashMap<String,HashMap<String,String>> approachLights;
 	HashMap<String,HashMap<String,String>> vasi;
-
-
+	HashMap<String,HashMap<String,String>> ils;
+	HashMap<String,HashMap<String,String>> glideSlope;
+	HashMap<String,HashMap<String,String>> visualModel;
+	HashMap<String,HashMap<String,String>> dme;
+	HashMap<String,HashMap<String,String>> runwayStart;
+	HashMap<String,HashMap<String,String>> runwayAlias;
+	HashMap<String,HashMap<String,String>> helipad;
+	HashMap<String,HashMap<String,String>> taxiwayPoint;
+	HashMap<String,HashMap<String,String>> taxiwayParking;
+	HashMap<String,HashMap<String,String>> taxiwayPath;
+	HashMap<String,HashMap<String,String>> taxiName;
 
 	int airportIndex;
 	int fuelsIndex;
@@ -32,10 +43,33 @@ public class MyListener extends XmltoSdlParserBaseListener {
 	int overRunIndex;
 	int approachLightsIndex;
 	int vasiIndex;
+	int ilsIndex;
+	int glideSlopeIndex;
+	int visualModelIndex;
+	int dmeIndex;
+	int runwayStartIndex;
+	int runwayAliasIndex;
+	int taxiwayPointIndex;
+	int taxiwayParkingIndex;
+	int taxiwayPathIndex;
+	int taxiNameIndex;
+	int helipadIndex;
 	boolean canBuildSdl = true;
+
 
 	@Override
 	public void enterXmlItems(@NotNull XmltoSdlParser.XmlItemsContext ctx){
+		taxiName = new HashMap<String,HashMap<String,String>>();
+		taxiwayPath = new HashMap<String,HashMap<String,String>>();
+		taxiwayParking = new HashMap<String,HashMap<String,String>>();
+		taxiwayPoint = new HashMap<String,HashMap<String,String>>();
+		helipad = new HashMap<String,HashMap<String,String>>();
+		runwayAlias = new HashMap<String,HashMap<String,String>>();
+		runwayStart = new HashMap<String,HashMap<String,String>>();
+		dme = new HashMap<String,HashMap<String,String>>();
+		visualModel = new HashMap<String,HashMap<String,String>>();
+		glideSlope = new HashMap<String,HashMap<String,String>>();
+		ils = new HashMap<String,HashMap<String,String>>();
 		vasi = new HashMap<String,HashMap<String,String>>();
 		approachLights = new HashMap<String,HashMap<String,String>>();
 		overRuns = new HashMap<String,HashMap<String,String>>();
@@ -56,12 +90,12 @@ public class MyListener extends XmltoSdlParserBaseListener {
 		fuelsIndex = -1;
 		comsIndex = -1;
 		runwayIndex = -1;
-		markingsIndex = -1;
-		lightsIndex = -1;
-		blastPadIndex = -1;
-		overRunIndex = -1;
-		approachLightsIndex = -1;
-		vasiIndex = -1;
+		runwayAliasIndex = -1;
+		helipadIndex = -1;
+		taxiwayPointIndex = -1;
+		taxiwayParkingIndex = -1;
+		taxiwayPathIndex = -1;
+		taxiNameIndex = -1;
 	}
 
 	@Override
@@ -77,6 +111,15 @@ public class MyListener extends XmltoSdlParserBaseListener {
 	@Override
 	public void enterRunway(@NotNull XmltoSdlParser.RunwayContext ctx){
 		runwayIndex++;
+		markingsIndex = -1;
+		offsetThresholdIndex =1; 
+		lightsIndex = -1;
+		blastPadIndex = -1;
+		overRunIndex = -1;
+		approachLightsIndex = -1;
+		vasiIndex = -1;
+		ilsIndex = -1;
+		runwayStartIndex = -1;
 	}
 
 	@Override
@@ -112,6 +155,66 @@ public class MyListener extends XmltoSdlParserBaseListener {
 	@Override
 	public void enterVasi(@NotNull XmltoSdlParser.VasiContext ctx){
 		vasiIndex++;
+	}
+
+	@Override
+	public void enterIls(@NotNull XmltoSdlParser.IlsContext ctx){
+		ilsIndex++;
+
+		glideSlopeIndex = -1;
+		visualModelIndex = -1;
+		dmeIndex = -1;
+	}
+
+	@Override
+	public void enterGlideSlope(@NotNull XmltoSdlParser.GlideSlopeContext ctx){
+		glideSlopeIndex++;
+	}
+
+	@Override
+	public void enterVisualModel(@NotNull XmltoSdlParser.VisualModelContext ctx){
+		visualModelIndex++;
+	}
+
+	@Override
+	public void enterDme(@NotNull XmltoSdlParser.DmeContext ctx){
+		dmeIndex++;
+	}
+
+	@Override
+	public void enterRunwayStart(@NotNull XmltoSdlParser.RunwayStartContext ctx){
+		runwayIndex++;
+	}
+
+	@Override
+	public void enterRunwayAlias(@NotNull XmltoSdlParser.RunwayAliasContext ctx){
+		runwayAliasIndex++;
+	}
+
+	@Override
+	public void enterHelipad(@NotNull XmltoSdlParser.HelipadContext ctx){
+		helipadIndex++;
+	}
+
+
+	@Override
+	public void enterTaxiwayPoint(@NotNull XmltoSdlParser.TaxiwayPointContext ctx){
+		taxiwayPointIndex++;
+	}
+
+	@Override
+	public void enterTaxiwayParking(@NotNull XmltoSdlParser.TaxiwayParkingContext ctx){
+		taxiwayParkingIndex++;
+	}
+
+	@Override
+	public void enterTaxiwayPath(@NotNull XmltoSdlParser.TaxiwayPathContext ctx){
+		taxiwayPathIndex++;
+	}
+
+	@Override
+	public void enterTaxiName(@NotNull XmltoSdlParser.TaxiNameContext ctx){
+		taxiNameIndex++;
 	}
 
 	public boolean checkStringSize(String s, int max){
@@ -1850,261 +1953,634 @@ public class MyListener extends XmltoSdlParserBaseListener {
 
 		vasi.put("AIRPORT_" + airportIndex + "-RUNWAY_" + runwayIndex + "-VASI_" + vasiIndex, vas);
 	}
-	/*
+
 	@Override
 	public void exitIls_open(@NotNull XmltoSdlParser.Ils_openContext ctx){
+
+		HashMap<String,String> i = new HashMap<String,String>();
+
 		//heading
 		try{
-			value = ctx.heading().get(0).value();
+			value = ctx.heading().value();
 			float val = Float.parseFloat(value.getText().split("\"")[1]);
 
 			if (val < 0 || val > 360) {
 				System.out.println("Line " + value.getStart().getLine()
 						+ ": invalid " + val);
+				canBuildSdl = false;
 
 			}
+			else
+				i.put("heading", "" + val);
 		} catch (NumberFormatException e) {
 			System.out.println("Line " + value.getStart().getLine()
 					+ ": invalid " + value.getText());
+			canBuildSdl = false;
 
 		} catch (NullPointerException e) {
 			System.out.println("Missing component ils heading");
+			canBuildSdl = false;
 		}
 
+		//frequency
 		try {
-			value = ctx.frequency().get(0).value();
+			value = ctx.frequency().value();
 			float val = Float.parseFloat(value.getText().split("\"")[1]);
 
 			if (val < 108.0 || val > 136.992) {
 				System.out.println("Line " + value.getStart().getLine()
 						+ ": invalid " + val);
-
+				canBuildSdl = false;
 			}
+			else
+				i.put("frequency", "" + val);
 		} catch (NumberFormatException e) {
 			System.out.println("Line " + value.getStart().getLine()
 					+ ": invalid " + value.getText());
+			canBuildSdl = false;
 
 		} catch (NullPointerException e) {
-			System.out.println("Missing component ils frequency");
+			System.out.println("Missing component ils heading");
+			canBuildSdl = false;
 		}
 
+		//end
 		try{
-			value = ctx.end().get(0).value();
+			value = ctx.end().value();
 			String[] numberOptions = {"PRIMARY","SECONDARY"};
 
 			String val = value.getText().split("\"")[1];
 			if(!Arrays.asList(numberOptions).contains(val)){
-
 				System.out.println("Line "+value.getStart().getLine()+": Wrong value: " + value.getText() + ". Expected: " + Arrays.toString(numberOptions));
-
-
+				canBuildSdl = false;
 			}
+			else
+				i.put("end", val);
 		}catch (NullPointerException e) {
 			System.out.println("Missing component end in ILS block");
+			canBuildSdl = false;
 		}
 
+		//range
 		try{
-			value = ctx.range().get(0).value();
+			value = ctx.range().value();
 			String str = value.getText().split("\"")[1];
 
-			if (Pattern.compile("[a-zA-Z]").matcher(str).find()) {
-				if (str.charAt((str.length() - 1)) != 'M'
-						&& str.charAt((str.length() - 1)) != 'N') {
-					System.out.println("Line "
-							+ value.getStart().getLine() + ": invalid "
-							+ value.getText());
-
-				}
+			String s;
+			if((s = checkStringSuffix(str)) == ""){
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + value.getText());
+				canBuildSdl = false;
 			}
+			else
+				i.put("range", s);
 		}catch (NullPointerException e) {
-
+			i.put("range", "27N");
 		}
 
+		//magvar
 		try {
-			value = ctx.magvar().get(0).value();
+			value = ctx.magvar().value();
 			float val = Float.parseFloat(value.getText().split("\"")[1]);
 
 			if (val < -360.0 || val > 360.0) {
 				System.out.println("Line " + value.getStart().getLine()
 						+ ": invalid " + val);
-
+				canBuildSdl = false;
 			}
+			else
+				i.put("magvar", "" + val);
 		} catch (NumberFormatException e) {
 			System.out.println("Line " + value.getStart().getLine()
 					+ ": invalid " + value.getText());
+			canBuildSdl = false;
 
 		} catch (NullPointerException e) {
-			System.out.println("Missing component ils magvar");
+			i.put("magvar", "0.0");
 		}
 
+		//ident
 		try{
-			value = ctx.ident().get(0).value();
+			value = ctx.ident().value();
 			String str = value.getText().split("\"")[1];
 
 			if (str.length() > 5) {
 				System.out.println("Line "
 						+ value.getStart().getLine() + ": invalid "
 						+ value.getText());
+				canBuildSdl = false;
 			}
+			else
+				i.put("ident", str);
 		}catch (NullPointerException e) {
 			System.out.println("Missing component ils ident");
+			canBuildSdl = false;
 		}
 
+		//width
 		try {
-			value = ctx.width().get(0).value();
+			value = ctx.width().value();
 			float val = Float.parseFloat(value.getText().split("\"")[1]);
 
 			if (val < 0 || val > 360.0) {
 				System.out.println("Line " + value.getStart().getLine()
 						+ ": invalid " + val);
-
+				canBuildSdl = false;
 			}
+			else
+				i.put("width", "" + val);
 		} catch (NumberFormatException e) {
 			System.out.println("Line " + value.getStart().getLine()
 					+ ": invalid " + value.getText());
-
+			canBuildSdl = false;
 		} catch (NullPointerException e) {
+			i.put("width", "5");
 		}
 
+		//name
 		try{
-			value = ctx.backCourse().get(0).value();
+
+			value = ctx.name().value();
+			String s = value.getText().split("\"")[1];
+			if (checkStringSize(s, 48)) {
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + value.getText());
+				canBuildSdl = false;
+
+			}
+			else{
+				i.put("name", s);
+			}
+		}catch (NullPointerException e) {
+		}
+
+		//lat
+		try{
+			value = ctx.lat().value();
+
+			float val = Float.parseFloat(value.getText().split("\"")[1]);
+
+			if (val < -90.0 || val > 90) {
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + val);
+
+				canBuildSdl = false;
+			}
+			else
+				i.put("lat", ""+val);		
+
+		} catch (NumberFormatException e) {
+			System.out.println("Line " + value.getStart().getLine()
+					+ ": invalid " + value.getText());
+			canBuildSdl = false;
+
+		} catch (NullPointerException e) {
+			System.out.println("Missing component lat in ILS");
+			canBuildSdl = false;
+		}
+
+
+		//lon
+		try {
+			value = ctx.lon().value();
+			float val = Float.parseFloat(value.getText().split("\"")[1]);
+
+			if (val < -180.0 || val > 180) {
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + val);
+
+				canBuildSdl = false;
+			}
+			else
+				i.put("lon", ""+val);		
+
+		} catch (NumberFormatException e) {
+			System.out.println("Line " + value.getStart().getLine()
+					+ ": invalid " + value.getText());
+			canBuildSdl = false;
+		} catch (NullPointerException e) {
+			System.out.println("Missing component lon in ILS");
+			canBuildSdl = false;
+		}
+
+
+		//alt
+		try{
+			value = ctx.alt().value();
+			String str = value.getText().split("\"")[1];
+			String s;
+			if((s = checkStringSuffix(str)) == ""){
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + value.getText());
+				canBuildSdl = false;
+			}
+			else
+				i.put("alt", str);
+		} catch (NullPointerException e) {
+			System.out.println("Missing component alt in ILS");
+			canBuildSdl = false;
+		}
+
+
+		//backCourse
+		try{
+			value = ctx.backCourse().value();
 			String[] numberOptions = {"TRUE","FALSE"};
 
 			String val = value.getText().split("\"")[1];
 			if(!Arrays.asList(numberOptions).contains(val)){
-
 				System.out.println("Line "+value.getStart().getLine()+": Wrong value: " + value.getText() + ". Expected: " + Arrays.toString(numberOptions));
-
-
+				canBuildSdl = false;
 			}
+			else
+				i.put("backCourse", val);
 		}catch (NullPointerException e) {
 		}
-	}
 
+		ils.put("AIRPORT_" + airportIndex + "-RUNWAY_" + runwayIndex + "-ILS_" + ilsIndex, i);
+	}
 	@Override
 	public void exitGlideSlope(@NotNull XmltoSdlParser.GlideSlopeContext ctx){
+
+		HashMap<String,String> glide = new HashMap<String,String>();
+
+		//lat
 		try{
-			value = ctx.pitch().get(0).value();
+			value = ctx.lat().value();
+
+			float val = Float.parseFloat(value.getText().split("\"")[1]);
+
+			if (val < -90.0 || val > 90) {
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + val);
+
+				canBuildSdl = false;
+			}
+			else
+				glide.put("lat", ""+val);		
+
+		} catch (NumberFormatException e) {
+			System.out.println("Line " + value.getStart().getLine()
+					+ ": invalid " + value.getText());
+			canBuildSdl = false;
+
+		} catch (NullPointerException e) {
+			System.out.println("Missing component lat in ILS");
+			canBuildSdl = false;
+		}
+
+
+		//lon
+		try {
+			value = ctx.lon().value();
+			float val = Float.parseFloat(value.getText().split("\"")[1]);
+
+			if (val < -180.0 || val > 180) {
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + val);
+
+				canBuildSdl = false;
+			}
+			else
+				glide.put("lon", ""+val);		
+
+		} catch (NumberFormatException e) {
+			System.out.println("Line " + value.getStart().getLine()
+					+ ": invalid " + value.getText());
+			canBuildSdl = false;
+		} catch (NullPointerException e) {
+			System.out.println("Missing component lon in ILS");
+			canBuildSdl = false;
+		}
+
+		//alt
+		try{
+			value = ctx.alt().value();
+			String str = value.getText().split("\"")[1];
+			String s;
+			if((s = checkStringSuffix(str)) == ""){
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + value.getText());
+				canBuildSdl = false;
+			}
+			else
+				glide.put("alt", str);
+		} catch (NullPointerException e) {
+			System.out.println("Missing component alt in ILS");
+			canBuildSdl = false;
+		}
+
+		//pitch
+		try{
+			value = ctx.pitch().value();
 			float val = Float.parseFloat(value.getText().split("\"")[1]);
 
 			if (val < 0 || val > 360) {
 				System.out.println("Line " + value.getStart().getLine()
 						+ ": invalid " + val);
-
+				canBuildSdl = false;
 			}
+			else
+				glide.put("pitch", "" + val);
 		} catch (NumberFormatException e) {
 			System.out.println("Line " + value.getStart().getLine()
 					+ ": invalid " + value.getText());
+			canBuildSdl = false;
 
 		} catch (NullPointerException e) {
 			System.out.println("Missing component glideslope pitch");
+			canBuildSdl = false;
 		}
 
+		//range
 		try{
-			value = ctx.range().get(0).value();
+			value = ctx.range().value();
 			String str = value.getText().split("\"")[1];
 
-			if (Pattern.compile("[a-zA-Z]").matcher(str).find()) {
-				if (str.charAt((str.length() - 1)) != 'M'
-						&& str.charAt((str.length() - 1)) != 'N') {
-					System.out.println("Line "
-							+ value.getStart().getLine() + ": invalid "
-							+ value.getText());
-
-				}
+			String s;
+			if((s = checkStringSuffix(str)) == ""){
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + value.getText());
+				canBuildSdl = false;
 			}
+			else
+				glide.put("range", s);
 		}catch (NullPointerException e) {
-			System.out.println("Missing component glideslope range");
+			glide.put("range", "27N");
 		}
+
+		glideSlope.put("AIRPORT_" + airportIndex + "-RUNWAY_" + runwayIndex + "-ILS_" + ilsIndex + "-GLIDESLOPE_" + glideSlopeIndex, glide);
 	}
 
 	@Override
 	public void exitVisualModel_open(@NotNull XmltoSdlParser.VisualModel_openContext ctx){
+
+		HashMap<String,String> vm = new HashMap<String,String>();
+
 		//heading
 		try{
-			value = ctx.heading().get(0).value();
+			value = ctx.heading().value();
 			float val = Float.parseFloat(value.getText().split("\"")[1]);
 
 			if (val < 0 || val > 360) {
 				System.out.println("Line " + value.getStart().getLine()
 						+ ": invalid " + val);
-
+				canBuildSdl = false;
 			}
+			else
+				vm.put("heading", "" + val);
 		} catch (NumberFormatException e) {
 			System.out.println("Line " + value.getStart().getLine()
 					+ ": invalid " + value.getText());
+			canBuildSdl = false;
 
 		} catch (NullPointerException e) {
 		}
 
+		//imageComplexity
 		try{
-			value = ctx.imageComplexity().get(0).value();
+			value = ctx.imageComplexity().value();
 			String[] numberOptions = {"VERY_SPARSE","SPARSE", "NORMAL","DENSE","VERY_DENSE"};
 
 			String val = value.getText().split("\"")[1];
 			if(!Arrays.asList(numberOptions).contains(val)){
-
 				System.out.println("Line "+value.getStart().getLine()+": Wrong value: " + value.getText() + ". Expected: " + Arrays.toString(numberOptions));
-
-
+				canBuildSdl = false;
 			}
+			else
+				vm.put("imageComplexity", val);
 		}catch (NullPointerException e) {
 		}
 
+		visualModel.put("AIRPORT_" + airportIndex + "-RUNWAY_" + runwayIndex + "-ILS_" + ilsIndex + "-VISUALMODEL_" + visualModelIndex, vm);
 
+	}
+
+
+	@Override
+	public void exitDme(@NotNull XmltoSdlParser.DmeContext ctx){
+
+		HashMap<String,String> dm = new HashMap<String,String>();
+
+		//lat
+		try{
+			value = ctx.lat().value();
+
+			float val = Float.parseFloat(value.getText().split("\"")[1]);
+
+			if (val < -90.0 || val > 90) {
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + val);
+
+				canBuildSdl = false;
+			}
+			else
+				dm.put("lat", ""+val);		
+
+		} catch (NumberFormatException e) {
+			System.out.println("Line " + value.getStart().getLine()
+					+ ": invalid " + value.getText());
+			canBuildSdl = false;
+
+		} catch (NullPointerException e) {
+			System.out.println("Missing component lat in Dme");
+			canBuildSdl = false;
+		}
+
+
+		//lon
+		try {
+			value = ctx.lon().value();
+			float val = Float.parseFloat(value.getText().split("\"")[1]);
+
+			if (val < -180.0 || val > 180) {
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + val);
+
+				canBuildSdl = false;
+			}
+			else
+				dm.put("lon", ""+val);		
+
+		} catch (NumberFormatException e) {
+			System.out.println("Line " + value.getStart().getLine()
+					+ ": invalid " + value.getText());
+			canBuildSdl = false;
+		} catch (NullPointerException e) {
+			System.out.println("Missing component lon in Dme");
+			canBuildSdl = false;
+		}
+
+		//alt
+		try{
+			value = ctx.alt().value();
+			String str = value.getText().split("\"")[1];
+			String s;
+			if((s = checkStringSuffix(str)) == ""){
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + value.getText());
+				canBuildSdl = false;
+			}
+			else
+				dm.put("alt", str);
+		} catch (NullPointerException e) {
+			System.out.println("Missing component alt in DME");
+			canBuildSdl = false;
+		}
+
+		//range
+		try{
+			value = ctx.range().value();
+			String str = value.getText().split("\"")[1];
+
+			String s;
+			if((s = checkStringSuffix(str)) == ""){
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + value.getText());
+				canBuildSdl = false;
+			}
+			else
+				dm.put("range", s);
+		}catch (NullPointerException e) {
+			//glide.put("range", "27N");
+		}
+
+		dme.put("AIRPORT_" + airportIndex + "-RUNWAY_" + runwayIndex + "-ILS_" + ilsIndex + "-DME_" + dmeIndex, dm);
 	}
 
 	@Override
 	public void exitRunwayStart(@NotNull XmltoSdlParser.RunwayStartContext ctx){
+
+		HashMap<String, String> rs = new HashMap<String, String>();
+
+		//type
 		try{
-			value = ctx.runway_type().get(0).value();
+			value = ctx.runway_type().value();
 			String val = value.getText().split("\"")[1];
 			if(!val.equals("RUNWAY")){
 
 				System.out.println("Line "+value.getStart().getLine()+": Wrong value: " + value.getText() + ". Expected: RUNWAY");
-
+				canBuildSdl = false;
 			}
+			else
+				rs.put("type", val);
 		}catch (NullPointerException e) {
 		}
 
+		//lat
 		try{
-			value = ctx.heading().get(0).value();
+			value = ctx.lat().value();
+
+			float val = Float.parseFloat(value.getText().split("\"")[1]);
+
+			if (val < -90.0 || val > 90) {
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + val);
+
+				canBuildSdl = false;
+			}
+			else
+				rs.put("lat", ""+val);		
+
+		} catch (NumberFormatException e) {
+			System.out.println("Line " + value.getStart().getLine()
+					+ ": invalid " + value.getText());
+			canBuildSdl = false;
+
+		} catch (NullPointerException e) {
+			System.out.println("Missing component lat in RunwayStart");
+			canBuildSdl = false;
+		}
+
+
+		//lon
+		try {
+			value = ctx.lon().value();
+			float val = Float.parseFloat(value.getText().split("\"")[1]);
+
+			if (val < -180.0 || val > 180) {
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + val);
+
+				canBuildSdl = false;
+			}
+			else
+				rs.put("lon", ""+val);		
+
+		} catch (NumberFormatException e) {
+			System.out.println("Line " + value.getStart().getLine()
+					+ ": invalid " + value.getText());
+			canBuildSdl = false;
+		} catch (NullPointerException e) {
+			System.out.println("Missing component lon in RunwayStart");
+			canBuildSdl = false;
+		}
+
+		//alt
+		try{
+			value = ctx.alt().value();
+			String str = value.getText().split("\"")[1];
+			String s;
+			if((s = checkStringSuffix(str)) == ""){
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + value.getText());
+				canBuildSdl = false;
+			}
+			else
+				rs.put("alt", str);
+		} catch (NullPointerException e) {
+			System.out.println("Missing component alt in RunwayStart");
+			canBuildSdl = false;
+		}
+
+		//heading
+		try{
+			value = ctx.heading().value();
 			float val = Float.parseFloat(value.getText().split("\"")[1]);
 
 			if (val < 0 || val > 360) {
 				System.out.println("Line " + value.getStart().getLine()
 						+ ": invalid " + val);
-
+				canBuildSdl = false;
 			}
+			else
+				rs.put("heading","" + val);
 		} catch (NumberFormatException e) {
 			System.out.println("Line " + value.getStart().getLine()
 					+ ": invalid " + value.getText());
+			canBuildSdl = false;
 
 		} catch (NullPointerException e) {
 			System.out.println("Missing component runwaystart heading");
-
+			canBuildSdl = false;
 		}
 
+		//end
 		try{
-			value = ctx.end().get(0).value();
+			value = ctx.end().value();
 			String[] numberOptions = {"PRIMARY","SECONDARY"};
 
 			String val = value.getText().split("\"")[1];
 			if(!Arrays.asList(numberOptions).contains(val)){
 
 				System.out.println("Line "+value.getStart().getLine()+": Wrong value: " + value.getText() + ". Expected: " + Arrays.toString(numberOptions));
-
-
+				canBuildSdl = false;
 			}
+			else
+				rs.put("end", val);
 		}catch (NullPointerException e) {
 		}
 
+		runwayStart.put("AIRPORT_" + airportIndex + "-RUNWAY_" + runwayIndex + "-RUNWAYSTART_" + runwayStartIndex, rs);
 	}
 
 	@Override
 	public void exitRunwayAlias(@NotNull XmltoSdlParser.RunwayAliasContext ctx){
+
+		HashMap<String,String> ra = new HashMap<String,String>();
+		//number
 		try{
-			value = ctx.runway_number().get(0).value();
+			value = ctx.runway_number().value();
 			String[] numberOptions = {"EAST","NORTH","NORTHEAST","NORTHWEST","SOUTH","SOUTHEAST","SOUTHWEST","WEST"};
 			String str = value.getText().split("\"")[1];
 
@@ -2112,37 +2588,111 @@ public class MyListener extends XmltoSdlParserBaseListener {
 					(Integer.parseInt(str) < 0 || Integer.parseInt(str) > 36)){
 
 				System.out.println("Line "+value.getStart().getLine()+": Wrong runway number: " + value.getText() + ". Expected: " + Arrays.toString(numberOptions) + ",or a int from 00 to 36");
-
-
+				canBuildSdl = false;
 			}
+			else
+				ra.put("number", str);
 		}catch (NullPointerException e) {
 			System.out.println("Missing component runwayAlias number");
+			canBuildSdl = false;
 		}
 
+		//designator
 		try{
-			value = ctx.designator().get(0).value();
+			value = ctx.designator().value();
 			String[] numberOptions = {"NONE","C","CENTER","L","LEFT","R","RIGHT","W","WATER","A","B"};
 
 			String val = value.getText().split("\"")[1];
 			if(!Arrays.asList(numberOptions).contains(val)){
 
 				System.out.println("Line "+value.getStart().getLine()+": Wrong value: " + value.getText() + ". Expected: " + Arrays.toString(numberOptions));
-
-
+				canBuildSdl = false;
 			}
+			else
+				ra.put("designator", val);
 		}catch (NullPointerException e) {
 			System.out.println("Missing component runwayAlias designator");
+			canBuildSdl = false;
 
 		}
 
-
-
+		runwayStart.put("AIRPORT_" + airportIndex + "-RUNWAYALIAS_" + runwayAliasIndex, ra);
 	}
 
 	@Override
 	public void exitHelipad(@NotNull XmltoSdlParser.HelipadContext ctx){
+
+		HashMap<String,String> hp = new HashMap<String,String>();
+
+		//lat
 		try{
-			value = ctx.surface().get(0).value();
+			value = ctx.lat().value();
+
+			float val = Float.parseFloat(value.getText().split("\"")[1]);
+
+			if (val < -90.0 || val > 90) {
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + val);
+
+				canBuildSdl = false;
+			}
+			else
+				hp.put("lat", ""+val);		
+
+		} catch (NumberFormatException e) {
+			System.out.println("Line " + value.getStart().getLine()
+					+ ": invalid " + value.getText());
+			canBuildSdl = false;
+
+		} catch (NullPointerException e) {
+			System.out.println("Missing component lat in helipad");
+			canBuildSdl = false;
+		}
+
+
+		//lon
+		try {
+			value = ctx.lon().value();
+			float val = Float.parseFloat(value.getText().split("\"")[1]);
+
+			if (val < -180.0 || val > 180) {
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + val);
+
+				canBuildSdl = false;
+			}
+			else
+				hp.put("lon", ""+val);		
+
+		} catch (NumberFormatException e) {
+			System.out.println("Line " + value.getStart().getLine()
+					+ ": invalid " + value.getText());
+			canBuildSdl = false;
+		} catch (NullPointerException e) {
+			System.out.println("Missing component lon in helipad");
+			canBuildSdl = false;
+		}
+
+		//alt
+		try{
+			value = ctx.alt().value();
+			String str = value.getText().split("\"")[1];
+			String s;
+			if((s = checkStringSuffix(str)) == ""){
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + value.getText());
+				canBuildSdl = false;
+			}
+			else
+				hp.put("alt", str);
+		} catch (NullPointerException e) {
+			System.out.println("Missing component alt in helipad");
+			canBuildSdl = false;
+		}
+
+		//surface
+		try{
+			value = ctx.surface().value();
 
 			String val = value.getText().split("\"")[1];
 			String[] surfaceOptions = {"ASPHALT","BITUMINOUS","BRICK","CLAY","CEMENT","CONCRETE","CORAL","DIRT","GRASS","GRAVEL","ICE","MACADAM","OIL_TREATED, PLANKS","SAND","SHALE","SNOW","STEEL_MATS","TARMAC","UNKNOWN","WATER"};
@@ -2150,71 +2700,76 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			if(!Arrays.asList(surfaceOptions).contains(val)){
 
 				System.out.println("Line "+value.getStart().getLine()+": Wrong surface type: " + value.getText() + ". Expected: " + Arrays.toString(surfaceOptions));
-
-
+				canBuildSdl = false;
 			}
+			else
+				hp.put("surface", val);
 		} catch (NullPointerException e) {
 			System.out.println("Missing component helipad surface");
-
+			canBuildSdl = false;
 		}
 
 		//heading
 		try{
-			value = ctx.heading().get(0).value();
+			value = ctx.heading().value();
 			float val = Float.parseFloat(value.getText().split("\"")[1]);
 
 			if (val < 0 || val > 360) {
 				System.out.println("Line " + value.getStart().getLine()
 						+ ": invalid " + val);
-
+				canBuildSdl = false;
 			}
+			else
+				hp.put("heading", "" + val);
 		} catch (NumberFormatException e) {
 			System.out.println("Line " + value.getStart().getLine()
 					+ ": invalid " + value.getText());
+			canBuildSdl = false;
 
 		} catch (NullPointerException e) {
 			System.out.println("Missing component helipad heading");
+			canBuildSdl = false;
 		}
 
 		//length
 		try{
-			value = ctx.length().get(0).value();
+			value = ctx.length().value();
 			String str = value.getText().split("\"")[1];
 
-			if (Pattern.compile("[a-zA-Z]").matcher(str).find()) {
-				if (str.charAt((str.length() - 1)) != 'M'
-						&& str.charAt((str.length() - 1)) != 'F') {
-					System.out.println("Line "
-							+ value.getStart().getLine() + ": invalid "
-							+ value.getText());
-
-				}
+			String s;
+			if((s = checkStringSuffix(str)) == ""){
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + value.getText());
+				canBuildSdl = false;
 			}
+			else
+				hp.put("length", s);
 		}catch (NullPointerException e) {
 			System.out.println("Missing component helipad length");
-
+			canBuildSdl = false;
 		}
 
 		//width
 		try{
-			value = ctx.width().get(0).value();
+			value = ctx.width().value();
 			String str = value.getText().split("\"")[1];
 
-			if (Pattern.compile("[a-zA-Z]").matcher(str).find()) {
-				if (str.charAt((str.length() - 1)) != 'M'
-						&& str.charAt((str.length() - 1)) != 'F') {
-					System.out.println("Line "
-							+ value.getStart().getLine() + ": invalid "
-							+ value.getText());
-
-				}
+			String s;
+			if((s = checkStringSuffix(str)) == ""){
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + value.getText());
+				canBuildSdl = false;
 			}
+			else
+				hp.put("width", s);
 		}catch (NullPointerException e) {
 			System.out.println("Missing component helipad width");
+			canBuildSdl = false;
 		}
 
+		//type
 		try{
-			value = ctx.helipad_type().get(0).value();
+			value = ctx.helipad_type().value();
 
 			String val = value.getText().split("\"")[1];
 			String[] surfaceOptions = {"NONE","CIRCLE","H","MEDICAL","SQUARE"};
@@ -2222,15 +2777,19 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			if(!Arrays.asList(surfaceOptions).contains(val)){
 
 				System.out.println("Line "+value.getStart().getLine()+": Wrong helipad type: " + value.getText() + ". Expected: " + Arrays.toString(surfaceOptions));
-
+				canBuildSdl = false;
 
 			}
+			else
+				hp.put("type", val);
 		} catch (NullPointerException e) {
 			System.out.println("Missing component helipad type");
+			canBuildSdl = false;
 		}
 
+		//closed
 		try{
-			value = ctx.closed().get(0).value();
+			value = ctx.closed().value();
 
 			String val = value.getText().split("\"")[1];
 			String[] surfaceOptions = {"TRUE","FALSE"};
@@ -2238,14 +2797,16 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			if(!Arrays.asList(surfaceOptions).contains(val)){
 
 				System.out.println("Line "+value.getStart().getLine()+": Wrong closed type: " + value.getText() + ". Expected: " + Arrays.toString(surfaceOptions));
-
-
+				canBuildSdl = false;
 			}
+			else
+				hp.put("closed", val);
 		} catch (NullPointerException e) {
 		}
 
+		//transparent
 		try{
-			value = ctx.transparent().get(0).value();
+			value = ctx.transparent().value();
 
 			String val = value.getText().split("\"")[1];
 			String[] surfaceOptions = {"TRUE","FALSE"};
@@ -2253,85 +2814,119 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			if(!Arrays.asList(surfaceOptions).contains(val)){
 
 				System.out.println("Line "+value.getStart().getLine()+": Wrong transparent type: " + value.getText() + ". Expected: " + Arrays.toString(surfaceOptions));
-
-
+				canBuildSdl  = false;
 			}
+			else
+				hp.put("transparent", val);
 		} catch (NullPointerException e) {
 		}
 
+		//red
 		try {
-			value = ctx.red().get(0).value();
+			value = ctx.red().value();
 			int val = Integer.parseInt(value.getText().split("\"")[1]);
 
 			if (val < 0 || val > 255) {
 				System.out.println("Line " + value.getStart().getLine()
 						+ ": invalid " + val);
-
+				canBuildSdl = false;
 			}
+			else
+				hp.put("red", "" + val);
 		} catch (NumberFormatException e) {
 			System.out.println("Line " + value.getStart().getLine()
 					+ ": invalid " + value.getText());
-
+			canBuildSdl = false;
 		} catch (NullPointerException e) {
 
 		}
 
+		//green
 		try {
-			value = ctx.green().get(0).value();
+			value = ctx.green().value();
 			int val = Integer.parseInt(value.getText().split("\"")[1]);
 
 			if (val < 0 || val > 255) {
 				System.out.println("Line " + value.getStart().getLine()
 						+ ": invalid " + val);
-
+				canBuildSdl = false;
 			}
+			else
+				hp.put("green", "" + val);
 		} catch (NumberFormatException e) {
 			System.out.println("Line " + value.getStart().getLine()
 					+ ": invalid " + value.getText());
-
+			canBuildSdl = false;
 		} catch (NullPointerException e) {
 
 		}
 
+		//blue
 		try {
-			value = ctx.blue().get(0).value();
+			value = ctx.blue().value();
 			int val = Integer.parseInt(value.getText().split("\"")[1]);
 
 			if (val < 0 || val > 255) {
 				System.out.println("Line " + value.getStart().getLine()
 						+ ": invalid " + val);
-
+				canBuildSdl = false;
 			}
+			else
+				hp.put("blue", "" + val);
 		} catch (NumberFormatException e) {
 			System.out.println("Line " + value.getStart().getLine()
 					+ ": invalid " + value.getText());
+			canBuildSdl = false;
 
 		} catch (NullPointerException e) {
 
 		}
+
+		helipad.put("AIRPORT_" + airportIndex + "-HELIPAD_" + helipadIndex, hp);
+
 	}
 
 	@Override
 	public void exitTaxiwayPoint(@NotNull XmltoSdlParser.TaxiwayPointContext ctx){
+
+		HashMap<String,String> tp = new HashMap<String,String>();
+
+		//index
 		try{
-			value = ctx.index().get(0).value();
+			value = ctx.index().value();
 			float val = Float.parseFloat(value.getText().split("\"")[1]);
 
 			if (val < 0 || val > 3999) {
 				System.out.println("Line " + value.getStart().getLine()
 						+ ": invalid " + val);
+				canBuildSdl = false;
+			}
+			else {
+				boolean  passed = true;
+				for(int i = 0; i < taxiwayPoint.size();i++){
+					if(taxiwayPoint.get("AIRPORT_" + airportIndex + "-TAXIWAYPOINT_" + i).get("index").equals("" + val)){
+						System.out.println("TaxiwayPoint index must be unique. Line " + value.getStart().getLine());
+						canBuildSdl = false;
+						passed = false;
+					}
+				}
 
+				if(passed)
+					tp.put("index", "" + val);				
 			}
 		} catch (NumberFormatException e) {
 			System.out.println("Line " + value.getStart().getLine()
 					+ ": invalid " + value.getText());
+			canBuildSdl = false;
 
 		} catch (NullPointerException e) {
 			System.out.println("Missing component taxiwayPoint index");
+			canBuildSdl = false;
 		}
 
+		//type
 		try{
-			value = ctx.taxiway_type().get(0).value();
+			value = ctx.taxiway_type().value();
 
 			String val = value.getText().split("\"")[1];
 			String[] surfaceOptions = {"NORMAL","HOLD_SHORT","ILS_HOLD_SHORT","HOLD_SHORT_NO_DRAW","ILS_HOLD_SHORT_NO_DRAW"};
@@ -2339,15 +2934,18 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			if(!Arrays.asList(surfaceOptions).contains(val)){
 
 				System.out.println("Line "+value.getStart().getLine()+": Wrong taxyway type: " + value.getText() + ". Expected: " + Arrays.toString(surfaceOptions));
-
-
+				canBuildSdl = false;
 			}
+			else
+				tp.put("type", val);
 		} catch (NullPointerException e) {
 			System.out.println("Missing component taxiwayPoint type");
+			canBuildSdl = false;
 		}
 
+		//orientation
 		try{
-			value = ctx.orientation().get(0).value();
+			value = ctx.orientation().value();
 
 			String val = value.getText().split("\"")[1];
 			String[] surfaceOptions = {"FORWARD","REVERSE"};
@@ -2355,77 +2953,163 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			if(!Arrays.asList(surfaceOptions).contains(val)){
 
 				System.out.println("Line "+value.getStart().getLine()+": Wrong taxyway orientation: " + value.getText() + ". Expected: " + Arrays.toString(surfaceOptions));
-
-
+				canBuildSdl = false;
 			}
+			else
+				tp.put("orientation", val);
 		} catch (NullPointerException e) {
 		}
 
 		try{
-			value = ctx.lat().get(0).value();
-			value = ctx.lon().get(0).value();
+			//lat
+			value = ctx.lat().value();
+			float val = Float.parseFloat(value.getText().split("\"")[1]);
+			if (val < -90.0 || val > 90) {
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + val);
+
+				canBuildSdl = false;
+			}
+			else
+				tp.put("lat", ""+val);		
+
+			//lon
+			value = ctx.lon().value();
+			val = Float.parseFloat(value.getText().split("\"")[1]);
+
+			if (val < -180.0 || val > 180) {
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + val);
+				canBuildSdl = false;
+			}
+			else
+				tp.put("lon", ""+val);		
+
+		} catch (NumberFormatException e) {
+			System.out.println("Line " + value.getStart().getLine()
+					+ ": invalid " + value.getText());
+			canBuildSdl = false;
 		} catch (NullPointerException e) {
 			try{
-				value = ctx.biasX_xyz().get(0).value();
+				value = ctx.biasX_xyz().value();
 				float val = Float.parseFloat(value.getText().split("\"")[1]);
+				tp.put("biasX", "" + val);
 
-				value = ctx.biasZ_xyz().get(0).value();
+				value = ctx.biasZ_xyz().value();
 				val = Float.parseFloat(value.getText().split("\"")[1]);
+				tp.put("biasZ", "" + val);
+
 			} catch (NumberFormatException e2) {
 				System.out.println("Line " + value.getStart().getLine()
 						+ ": invalid " + value.getText());
+				canBuildSdl = false;
 			}catch (NullPointerException e1) {
 				System.out.println("Missing components taxiwayPoint lat,lon/biasX,biasZ    You must have one of the pairs");
+				canBuildSdl = false;
 			}
 		}
+
+		taxiwayPoint.put("AIRPORT_" + airportIndex + "-TAXIWAYPOINT_" + taxiwayPointIndex, tp);
 	}
 
 	@Override
 	public void exitTaxiwayParking(@NotNull XmltoSdlParser.TaxiwayParkingContext ctx){
+		HashMap<String,String> tp = new HashMap<String,String>();
+
+		//index
 		try{
-			value = ctx.index().get(0).value();
+			value = ctx.index().value();
 			float val = Float.parseFloat(value.getText().split("\"")[1]);
 
 			if (val < 0 || val > 3999) {
 				System.out.println("Line " + value.getStart().getLine()
 						+ ": invalid " + val);
+				canBuildSdl = false;
+			}
+			else {
+				boolean  passed = true;
+				for(int i = 0; i < taxiwayPoint.size();i++){
+					if(taxiwayPoint.get("AIRPORT_" + airportIndex + "-TAXIWAYPARKING_" + i).get("index").equals("" + val)){
+						System.out.println("TaxiwayParking index must be unique. Line " + value.getStart().getLine());
+						canBuildSdl = false;
+						passed = false;
+					}
+				}
 
+				if(passed)
+					tp.put("index", "" + val);				
 			}
 		} catch (NumberFormatException e) {
 			System.out.println("Line " + value.getStart().getLine()
 					+ ": invalid " + value.getText());
+			canBuildSdl = false;
 
 		} catch (NullPointerException e) {
 			System.out.println("Missing component taxiwayParking index");
+			canBuildSdl = false;
 		}
 
 		try{
-			value = ctx.lat().get(0).value();
-			value = ctx.lon().get(0).value();
+			//lat
+			value = ctx.lat().value();
+			float val = Float.parseFloat(value.getText().split("\"")[1]);
+			if (val < -90.0 || val > 90) {
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + val);
+
+				canBuildSdl = false;
+			}
+			else
+				tp.put("lat", ""+val);		
+
+			//lon
+			value = ctx.lon().value();
+			val = Float.parseFloat(value.getText().split("\"")[1]);
+
+			if (val < -180.0 || val > 180) {
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + val);
+				canBuildSdl = false;
+			}
+			else
+				tp.put("lon", ""+val);		
+
+		} catch (NumberFormatException e) {
+			System.out.println("Line " + value.getStart().getLine()
+					+ ": invalid " + value.getText());
+			canBuildSdl = false;
 		} catch (NullPointerException e) {
 			try{
-				value = ctx.biasX().get(0).value();
+				value = ctx.biasX().value();
 				float val = Float.parseFloat(value.getText().split("\"")[1]);
+				tp.put("biasX", "" + val);
 
-				value = ctx.biasZ().get(0).value();
+				value = ctx.biasZ().value();
 				val = Float.parseFloat(value.getText().split("\"")[1]);
+				tp.put("biasZ", "" + val);
+
 			} catch (NumberFormatException e2) {
 				System.out.println("Line " + value.getStart().getLine()
 						+ ": invalid " + value.getText());
+				canBuildSdl = false;
 			}catch (NullPointerException e1) {
-				System.out.println("Missing components taxiwayPoint lat,lon/biasX,biasZ    You must have one of the pairs");
+				System.out.println("Missing components taxiwayParking lat,lon/biasX,biasZ    You must have one of the pairs");
+				canBuildSdl = false;
 			}
 		}
 
+		//heading
 		try{
-			value = ctx.heading().get(0).value();
+			value = ctx.heading().value();
 			float val = Float.parseFloat(value.getText().split("\"")[1]);
 
 			if (val < 0 || val > 360) {
 				System.out.println("Line " + value.getStart().getLine()
 						+ ": invalid " + val);
-
+				canBuildSdl = false;
 			}
+			else
+				tp.put("heading", "" + val);
 		} catch (NumberFormatException e) {
 			System.out.println("Line " + value.getStart().getLine()
 					+ ": invalid " + value.getText());
@@ -2434,24 +3118,24 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			System.out.println("Missing component taxiwayParking heading");
 		}
 
+		//radius
 		try {
-			value = ctx.radius().get(0).value();
+			value = ctx.radius().value();
 			String str = value.getText().split("\"")[1];
-
-			if (str.charAt((str.length() - 1)) != 'M'
-					&& str.charAt((str.length() - 1)) != 'F'
-					&& str.charAt((str.length() - 1)) != 'N') {
+			String s;
+			if((s = checkStringSuffix(str)) == ""){
 				System.out.println("Line " + value.getStart().getLine()
-						+ ": invalid " + str);
-
-
-			}
+						+ ": invalid " + value.getText());
+				canBuildSdl = false;
+			}				
+			tp.put("radius", s);
 		} catch (NullPointerException e) {
 			System.out.println("Missing component taxiwayParking radius");
 		}
 
+		//type
 		try{
-			value = ctx.parking_type().get(0).value();
+			value = ctx.parking_type().value();
 
 			String val = value.getText().split("\"")[1];
 			String[] surfaceOptions = {"NONE","DOCK_GA","FUEL","GATE_HEAVY","GATE_MEDIUM","GATE_SMALL","RAMP_CARGO","RAMP_GA"
@@ -2460,15 +3144,18 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			if(!Arrays.asList(surfaceOptions).contains(val)){
 
 				System.out.println("Line "+value.getStart().getLine()+": Wrong taxyparking type: " + value.getText() + ". Expected: " + Arrays.toString(surfaceOptions));
-
-
+				canBuildSdl = false;
 			}
+			else
+				tp.put("type", val);
 		} catch (NullPointerException e) {
 			System.out.println("Missing component taxiwayParking type");
+			canBuildSdl = false;
 		}
 
+		//name
 		try{
-			value = ctx.parking_name().get(0).value();
+			value = ctx.parking_name().value();
 
 			String val = value.getText().split("\"")[1];
 			String[] surfaceOptions = {"PARKING","DOCK","GATE","NONE","N_PARKING","NE_PARKING","NW_PARKING","SE_PARKING"
@@ -2478,34 +3165,55 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			if(!(Arrays.asList(surfaceOptions).contains(val) || Pattern.compile("GATE_[A-Z]").matcher(val).find())){
 
 				System.out.println("Line "+value.getStart().getLine()+": Wrong taxyparking name: " + value.getText() + ". Expected: " + Arrays.toString(surfaceOptions));
-
-
+				canBuildSdl = false;
 			}
+			else
+				tp.put("name", val);
 		} catch (NullPointerException e) {
 			System.out.println("Missing component taxiwayParking name");
+			canBuildSdl = false;
 		}
 
+		//number
 		try{
-			value = ctx.number().get(0).value();
+			value = ctx.number().value();
 			float val = Float.parseFloat(value.getText().split("\"")[1]);
 
 			if (val < 0 || val > 3999) {
 				System.out.println("Line " + value.getStart().getLine()
 						+ ": invalid " + val);
-
+				canBuildSdl = false;
 			}
+			else
+				tp.put("number", "" + val);
 		} catch (NumberFormatException e) {
 			System.out.println("Line " + value.getStart().getLine()
 					+ ": invalid " + value.getText());
+			canBuildSdl = false;
 
 		} catch (NullPointerException e) {
 			System.out.println("Missing component taxiwayParking number");
+			canBuildSdl = false;
 		}
+
+		taxiwayParking.put("AIRPORT_" + airportIndex + "-TAXIWAYPARKING_" + taxiwayParkingIndex, tp);
 	}
 
 	@Override
 	public void exitTaxiwayPath(@NotNull XmltoSdlParser.TaxiwayPathContext ctx){
-		try{
+
+		HashMap<String,String> tp = new HashMap<String,String>();
+
+		//type
+		if(ctx.path_type().size() == 0){
+			System.out.println("Missing component path_type in taxiwayPath");
+			canBuildSdl = false;
+		}
+		else if(ctx.path_type().size() > 1){
+			System.out.println("Duplicate attribute path_type in taxiwayPath, line " +  value.getStart().getLine());
+			canBuildSdl = false;
+		}
+		else{
 			value = ctx.path_type().get(0).value();
 
 			String val = value.getText().split("\"")[1];
@@ -2513,70 +3221,124 @@ public class MyListener extends XmltoSdlParserBaseListener {
 
 
 			if(!Arrays.asList(surfaceOptions).contains(val)){
-
 				System.out.println("Line "+value.getStart().getLine()+": Wrong taxiway type: " + value.getText() + ". Expected: " + Arrays.toString(surfaceOptions));
+				canBuildSdl = false;
 			}
-		} catch (NullPointerException e) {
-			System.out.println("Missing component taxiwayPath type");
+			else
+				tp.put("type", val);
 		}
 
-		try{
-			value = ctx.path_start().get(0).value();
-			float val = Float.parseFloat(value.getText().split("\"")[1]);
+		//start
+		//TODO check connectivity
+		if(ctx.path_start().size() == 0){
+			System.out.println("Missing component path_start in taxiwayPath");
+			canBuildSdl = false;
+		}
+		else if(ctx.path_start().size() > 1){
+			System.out.println("Duplicate attribute path_start in taxiwayPath, line " +  value.getStart().getLine());
+			canBuildSdl = false;
+		}
+		else{
+			try{
+				value = ctx.path_start().get(0).value();
+				float val = Float.parseFloat(value.getText().split("\"")[1]);
 
-			if (val < 0 || val > 3999) {
+				if (val < 0 || val > 3999) {
+					System.out.println("Line " + value.getStart().getLine()
+							+ ": invalid " + val);
+					canBuildSdl = false;
+				}
+				else
+					tp.put("start","" + val);
+			} catch (NumberFormatException e) {
 				System.out.println("Line " + value.getStart().getLine()
-						+ ": invalid " + val);
+						+ ": invalid " + value.getText());
+				canBuildSdl = false;
 
 			}
-		} catch (NumberFormatException e) {
-			System.out.println("Line " + value.getStart().getLine()
-					+ ": invalid " + value.getText());
-
-		} catch (NullPointerException e) {
-			System.out.println("Missing component taxiwayPath start");
 		}
 
-		try{
-			value = ctx.path_end().get(0).value();
-			float val = Float.parseFloat(value.getText().split("\"")[1]);
+		//end
+		if(ctx.path_end().size() == 0){
+			System.out.println("Missing component path_end in taxiwayPath");
+			canBuildSdl = false;
+		}
+		else if(ctx.path_end().size() > 1){
+			System.out.println("Duplicate attribute path_end in taxiwayPath, line " +  value.getStart().getLine());
+			canBuildSdl = false;
+		}
+		else{
+			try{
+				value = ctx.path_end().get(0).value();
+				float val = Float.parseFloat(value.getText().split("\"")[1]);
 
-			if (val < 0 || val > 3999) {
+				if (val < 0 || val > 3999) {
+					System.out.println("Line " + value.getStart().getLine()
+							+ ": invalid " + val);
+					canBuildSdl = false;
+				}
+				else
+					tp.put("end", "" + val);
+			} catch (NumberFormatException e) {
 				System.out.println("Line " + value.getStart().getLine()
-						+ ": invalid " + val);
+						+ ": invalid " + value.getText());
+				canBuildSdl = false;
 
-			}
-		} catch (NumberFormatException e) {
-			System.out.println("Line " + value.getStart().getLine()
-					+ ": invalid " + value.getText());
-
-		} catch (NullPointerException e) {
-			System.out.println("Missing component taxiwayPath end");
+			} 
 		}
 
-		try{
-			value = ctx.width().get(0).value();
-			Float.parseFloat(value.getText().split("\"")[1]);
-		} catch (NumberFormatException e) {
-			System.out.println("Line " + value.getStart().getLine()
-					+ ": invalid " + value.getText());
-
-		} catch (NullPointerException e) {
-			System.out.println("Missing component taxiwayPath width");
+		//width
+		if(ctx.width().size() == 0){
+			System.out.println("Missing component width in taxiwayPath");
+			canBuildSdl = false;
+		}
+		else if(ctx.width().size() > 1){
+			System.out.println("Duplicate attribute width in taxiwayPath, line " +  value.getStart().getLine());
+			canBuildSdl = false;
+		}
+		else{
+			try{
+				value = ctx.width().get(0).value();
+				Float.parseFloat(value.getText().split("\"")[1]);
+				tp.put("width", value.getText());
+			} catch (NumberFormatException e) {
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + value.getText());
+				canBuildSdl = false;
+			} 
 		}
 
-		try{
-			value = ctx.weightLimit().get(0).value();
-			Float.parseFloat(value.getText().split("\"")[1]);
-		} catch (NumberFormatException e) {
-			System.out.println("Line " + value.getStart().getLine()
-					+ ": invalid " + value.getText());
-
-		} catch (NullPointerException e) {
-			System.out.println("Missing component taxiwayPath weight limit");
+		//weightLimit
+		if(ctx.weightLimit().size() == 0){
+			System.out.println("Missing component weightLimit in taxiwayPath");
+			canBuildSdl = false;
+		}
+		else if(ctx.weightLimit().size() > 1){
+			System.out.println("Duplicate attribute weightLimit in taxiwayPath, line " +  value.getStart().getLine());
+			canBuildSdl = false;
+		}
+		else{
+			try{
+				value = ctx.weightLimit().get(0).value();
+				Float.parseFloat(value.getText().split("\"")[1]);
+				tp.put("weightLimit", value.getText());
+			} catch (NumberFormatException e) {
+				System.out.println("Line " + value.getStart().getLine()
+						+ ": invalid " + value.getText());
+				canBuildSdl = false;
+			} 
 		}
 
-		try{
+		//surface
+		if(ctx.surface().size() == 0){
+			System.out.println("Missing component surface in taxiwayPath");
+			canBuildSdl = false;
+		}
+		else if(ctx.surface().size() > 1){
+			System.out.println("Duplicate attribute surface in taxiwayPath, line " +  value.getStart().getLine());
+			canBuildSdl = false;
+		}
+		else{
 			value = ctx.surface().get(0).value();
 
 			String val = value.getText().split("\"")[1];
@@ -2585,15 +3347,22 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			if(!Arrays.asList(surfaceOptions).contains(val)){
 
 				System.out.println("Line "+value.getStart().getLine()+": Wrong surface type: " + value.getText() + ". Expected: " + Arrays.toString(surfaceOptions));
-
-
+				canBuildSdl = false;
 			}
-		} catch (NullPointerException e) {
-			System.out.println("Missing component taxiway path surface");
-
+			else
+				tp.put("surface", val);
 		}
 
-		try{
+		//drawDetail
+		if(ctx.drawDetail().size() == 0){
+			System.out.println("Missing component drawDetail in taxiwayPath");
+			canBuildSdl = false;
+		}
+		else if(ctx.drawDetail().size() > 1){
+			System.out.println("Duplicate attribute drawDetail in taxiwayPath, line " +  value.getStart().getLine());
+			canBuildSdl = false;
+		}
+		else{
 			value = ctx.drawDetail().get(0).value();
 
 			String val = value.getText().split("\"")[1];
@@ -2602,15 +3371,22 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			if(!Arrays.asList(surfaceOptions).contains(val)){
 
 				System.out.println("Line "+value.getStart().getLine()+": Wrong drawDetail: " + value.getText() + ". Expected: " + Arrays.toString(surfaceOptions));
-
-
+				canBuildSdl = false;
 			}
-		} catch (NullPointerException e) {
-			System.out.println("Missing component taxiway path drawDetail");
+			else
+				tp.put("drawDetail", val);
+		} 
 
+		//drawSurface
+		if(ctx.drawDetail().size() == 0){
+			System.out.println("Missing component drawDetail in taxiwayPath");
+			canBuildSdl = false;
 		}
-
-		try{
+		else if(ctx.drawDetail().size() > 1){
+			System.out.println("Duplicate attribute drawDetail in taxiwayPath, line " +  value.getStart().getLine());
+			canBuildSdl = false;
+		}
+		else{
 			value = ctx.drawSurface().get(0).value();
 
 			String val = value.getText().split("\"")[1];
@@ -2619,15 +3395,21 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			if(!Arrays.asList(surfaceOptions).contains(val)){
 
 				System.out.println("Line "+value.getStart().getLine()+": Wrong drawSurface: " + value.getText() + ". Expected: " + Arrays.toString(surfaceOptions));
-
-
+				canBuildSdl = false;
 			}
-		} catch (NullPointerException e) {
-			System.out.println("Missing component taxiway path drawSurface");
-
+			else
+				tp.put("drawSurface", val);
 		}
 
-		try{
+		//centerLine
+		if(ctx.centerLine().size() == 0){
+			tp.put("centerLine", "FALSE");
+		}
+		else if(ctx.centerLine().size() > 1){
+			System.out.println("Duplicate attribute centerLine in taxiwayPath, line " +  value.getStart().getLine());
+			canBuildSdl = false;
+		}
+		else{
 			value = ctx.centerLine().get(0).value();
 
 			String val = value.getText().split("\"")[1];
@@ -2636,14 +3418,21 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			if(!Arrays.asList(surfaceOptions).contains(val)){
 
 				System.out.println("Line "+value.getStart().getLine()+": Wrong centerLine: " + value.getText() + ". Expected: " + Arrays.toString(surfaceOptions));
-
-
+				canBuildSdl = false;
 			}
-		} catch (NullPointerException e) {
+			else
+				tp.put("centerLine", val);
+		} 
 
+		//centerLineLighted
+		if(ctx.centerLineLighted().size() == 0){
+			tp.put("centerLineLighted", "FALSE");
 		}
-
-		try{
+		else if(ctx.centerLineLighted().size() > 1){
+			System.out.println("Duplicate attribute centerLineLighted in taxiwayPath, line " +  value.getStart().getLine());
+			canBuildSdl = false;
+		}
+		else{
 			value = ctx.centerLineLighted().get(0).value();
 
 			String val = value.getText().split("\"")[1];
@@ -2652,12 +3441,21 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			if(!Arrays.asList(surfaceOptions).contains(val)){
 
 				System.out.println("Line "+value.getStart().getLine()+": Wrong centerLineLeighted: " + value.getText() + ". Expected: " + Arrays.toString(surfaceOptions));
+				canBuildSdl = false;
 			}
-		} catch (NullPointerException e) {
-
+			else
+				tp.put("centerLineLighted", val);
 		}
 
-		try{
+		//leftEdge
+		if(ctx.leftEdge().size() == 0){
+			tp.put("leftEdge", "NONE");
+		}
+		else if(ctx.leftEdge().size() > 1){
+			System.out.println("Duplicate attribute leftEdge in taxiwayPath, line " +  value.getStart().getLine());
+			canBuildSdl = false;
+		}
+		else{
 			value = ctx.leftEdge().get(0).value();
 
 			String val = value.getText().split("\"")[1];
@@ -2666,12 +3464,21 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			if(!Arrays.asList(surfaceOptions).contains(val)){
 
 				System.out.println("Line "+value.getStart().getLine()+": Wrong leftedge: " + value.getText() + ". Expected: " + Arrays.toString(surfaceOptions));
+				canBuildSdl = false;
 			}
-		} catch (NullPointerException e) {
-
+			else
+				tp.put("leftEdge", val);
 		}
 
-		try{
+		//leftEdgeLighted
+		if(ctx.leftEdgeLighted().size() == 0){
+			tp.put("leftEdgeLighted", "FALSE");
+		}
+		else if(ctx.leftEdgeLighted().size() > 1){
+			System.out.println("Duplicate attribute centerLine in taxiwayPath, line " +  value.getStart().getLine());
+			canBuildSdl = false;
+		}
+		else{
 			value = ctx.leftEdgeLighted().get(0).value();
 
 			String val = value.getText().split("\"")[1];
@@ -2680,12 +3487,21 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			if(!Arrays.asList(surfaceOptions).contains(val)){
 
 				System.out.println("Line "+value.getStart().getLine()+": Wrong leftEdgeLeighted: " + value.getText() + ". Expected: " + Arrays.toString(surfaceOptions));
+				canBuildSdl = false;
 			}
-		} catch (NullPointerException e) {
+			else
+				tp.put("leftEdgeLighted", val);
+		} 
 
+		//rightEdge
+		if(ctx.rightEdge().size() == 0){
+			tp.put("rightEdge", "NONE");
 		}
-
-		try{
+		else if(ctx.rightEdge().size() > 1){
+			System.out.println("Duplicate attribute rightEdge in taxiwayPath, line " +  value.getStart().getLine());
+			canBuildSdl = false;
+		}
+		else{
 			value = ctx.rightEdge().get(0).value();
 
 			String val = value.getText().split("\"")[1];
@@ -2694,12 +3510,21 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			if(!Arrays.asList(surfaceOptions).contains(val)){
 
 				System.out.println("Line "+value.getStart().getLine()+": Wrong rightedge: " + value.getText() + ". Expected: " + Arrays.toString(surfaceOptions));
+				canBuildSdl = false;
 			}
-		} catch (NullPointerException e) {
+			else
+				tp.put("rightEdge", val);
+		} 
 
+		//rightEdgeLighted
+		if(ctx.rightEdgeLighted().size() == 0){
+			tp.put("rightEdgeLighted", "FALSE");
 		}
-
-		try{
+		else if(ctx.leftEdgeLighted().size() > 1){
+			System.out.println("Duplicate attribute rightEdgeLighted in taxiwayPath, line " +  value.getStart().getLine());
+			canBuildSdl = false;
+		}
+		else{
 			value = ctx.rightEdgeLighted().get(0).value();
 
 			String val = value.getText().split("\"")[1];
@@ -2708,29 +3533,64 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			if(!Arrays.asList(surfaceOptions).contains(val)){
 
 				System.out.println("Line "+value.getStart().getLine()+": Wrong rightEdgeLeighted: " + value.getText() + ". Expected: " + Arrays.toString(surfaceOptions));
+				canBuildSdl = false;
 			}
-		} catch (NullPointerException e) {
+			else
+				tp.put("rightEdgeLighted", val);
+		} 
 
+		//number
+		if(ctx.number().size() == 0){
+			System.out.println("Missing component drawDetail in number");
+			canBuildSdl = false;
 		}
-
-		try{//TODO ver valor de type
+		else if(ctx.number().size() > 1){
+			System.out.println("Duplicate attribute number in taxiwayPath, line " +  value.getStart().getLine());
+			canBuildSdl = false;
+		}
+		else{
 			value = ctx.number().get(0).value();
-			String[] numberOptions = {"EAST","NORTH","NORTHEAST","NORTHWEST","SOUTH","SOUTHEAST","SOUTHWEST","WEST"};
 			String str = value.getText().split("\"")[1];
 
-			if(!Arrays.asList(numberOptions).contains(value.getText()) &&
-					(Integer.parseInt(str) < 0 || Integer.parseInt(str) > 36)){
+			if(tp.get("type").equals("RUNWAY")){
+				try{
+					if(Integer.parseInt(str) < 0 || Integer.parseInt(str) > 36){
+						System.out.println("Line "+value.getStart().getLine()+": Wrong taxiWayPath number: " + value.getText() + ". Expected:  an int from 00 to 36");
+						canBuildSdl = false;
+					}
+					else
+						tp.put("number", str);
 
-				System.out.println("Line "+value.getStart().getLine()+": Wrong taxiWayPath number: " + value.getText() + ". Expected: " + Arrays.toString(numberOptions) + ",or a int from 00 to 36");
-
-
+				}catch (NumberFormatException e) {
+					System.out.println("Line " + value.getStart().getLine()
+							+ ": invalid " + value.getText());
+				} 
 			}
-		}catch (NullPointerException e) {
-			System.out.println("Missing component taxiWayPath number");
-
+			else{
+				String[] numberOptions = {"EAST","NORTH","NORTHEAST","NORTHWEST","SOUTH","SOUTHEAST","SOUTHWEST","WEST"};
+				if(!Arrays.asList(numberOptions).contains(value.getText())){
+					System.out.println("Line "+value.getStart().getLine()+": Wrong taxiWayPath number: " + value.getText() + ". Expected: " + Arrays.toString(numberOptions));
+					canBuildSdl = false;
+				}
+				else
+					tp.put("number", str);
+			}
 		}
 
-		try{
+		//designator
+		if(ctx.designator().size() == 0){
+			if(tp.get("type").equals("RUNWAY")){
+				System.out.println("Missing component designator in number");
+				canBuildSdl = false;
+			}
+			else
+				tp.put("designator", "NONE");
+		}
+		else if(ctx.designator().size() > 1){
+			System.out.println("Duplicate attribute designator in taxiwayPath, line " +  value.getStart().getLine());
+			canBuildSdl = false;
+		}
+		else{
 			value = ctx.designator().get(0).value();
 			String[] numberOptions = {"NONE","C","CENTER","L","LEFT","R","RIGHT","W","WATER","A","B"};
 
@@ -2738,100 +3598,95 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			if(!Arrays.asList(numberOptions).contains(val)){
 
 				System.out.println("Line "+value.getStart().getLine()+": Wrong value: " + value.getText() + ". Expected: " + Arrays.toString(numberOptions));
-
-
+				canBuildSdl = false;
 			}
-		}catch (NullPointerException e) {
-			System.out.println("Missing component taxiWayPath designator");
-
+			else
+				tp.put("designator", val);
 		}
 
-		try{
-			value = ctx.path_name().get(0).value();
-			float val = Float.parseFloat(value.getText().split("\"")[1]);
+		//designator
+		if(ctx.path_name().size() == 0){
+			if(tp.get("type").equals("RUNWAY")){
+				System.out.println("Missing component path_name in number");
+				canBuildSdl = false;
+			}
+		}
+		else if(ctx.path_name().size() > 1){
+			System.out.println("Duplicate attribute path_name in taxiwayPath, line " +  value.getStart().getLine());
+			canBuildSdl = false;
+		}
+		else{
+			try{
+				value = ctx.path_name().get(0).value();
+				float val = Float.parseFloat(value.getText().split("\"")[1]);
 
-			if (val < 0 || val > 255) {
+				if (val < 0 || val > 255) {
+					System.out.println("Line " + value.getStart().getLine()
+							+ ": invalid " + val);
+					canBuildSdl = false;
+				}
+				else
+					tp.put("name", "" + val);
+			} catch (NumberFormatException e) {
 				System.out.println("Line " + value.getStart().getLine()
-						+ ": invalid " + val);
-
-			}
-		} catch (NumberFormatException e) {
-			System.out.println("Line " + value.getStart().getLine()
-					+ ": invalid " + value.getText());
-
-		} catch (NullPointerException e) {
-			System.out.println("Missing component taxiwayPath name");
+						+ ": invalid " + value.getText());
+				canBuildSdl = false;
+			} 
 		}
 
+		taxiwayPath.put("AIRPORT_" + airportIndex + "-TAXIWAYPATH_" + taxiwayPathIndex, tp);
 	}
 
 	@Override
 	public void exitTaxiName(@NotNull XmltoSdlParser.TaxiNameContext ctx){
+
+		HashMap<String, String> tn = new HashMap<String, String>();
+
 		try{
-			value = ctx.index255().get(0).value();
+			value = ctx.index255().value();
 			float val = Float.parseFloat(value.getText().split("\"")[1]);
 
 			if (val < 0 || val > 255) {
 				System.out.println("Line " + value.getStart().getLine()
 						+ ": invalid " + val);
-
+				canBuildSdl = false;
 			}
+			else
+				tn.put("index", "" + val);
 		} catch (NumberFormatException e) {
 			System.out.println("Line " + value.getStart().getLine()
 					+ ": invalid " + value.getText());
+			canBuildSdl = false;
 
 		} catch (NullPointerException e) {
 			System.out.println("Missing component taxiName index");
+			canBuildSdl = false;
 		}
 
 		try{
-			value = ctx.taxi_name().get(0).value();
+			value = ctx.taxi_name().value();
 
 			String val = value.getText().split("\"")[1];
 			if(val.length() > 8){
 
 				System.out.println("Line "+value.getStart().getLine()+": Wrong value: " + value.getText() + ". Expected: 8 chars max" );
-
+				canBuildSdl = false;
 			}
+			else
+				tn.put("name", val);
 		}catch (NullPointerException e) {
 			System.out.println("Missing component taxiName name");
+			canBuildSdl = false;
 		}
 	}
 
+	
 	@Override
-	public void exitAirport_content(@NotNull XmltoSdlParser.Airport_contentContext ctx){
-
-		if(ctx.tower().size() == 0)
-			System.out.println("Missing tower block");
-
-		if(ctx.services().size() == 0)
-			System.out.println("Missing services block");
-
-		if(ctx.com().size() == 0)
-			System.out.println("Missing com block");
-
-		if(ctx.runway().size() == 0)
-			System.out.println("Missing runway block");
-
-		if(ctx.runwayAlias().size() == 0)
-			System.out.println("Missing runwayAlias block");
-
-		if(ctx.taxiwayPoint().size() == 0)
-			System.out.println("Missing taxiwayPoint block");
-
-		if(ctx.taxiName().size() == 0)
-			System.out.println("Missing taxiName block");
-
-		if(ctx.taxiwayParking().size() == 0)
-			System.out.println("Missing taxiwayParking block");
-
-		if(ctx.taxiwayPath().size() == 0)
-			System.out.println("Missing taxiwayPath block");
-
-		if(ctx.helipad().size() == 0)
-			System.out.println("Missing helipad block");
-
+	public void exitDocument(@NotNull XmltoSdlParser.DocumentContext ctx){
+		if(canBuildSdl){
+			SdlBuilder.build();
+		}
+		else
+			System.out.println("Errors found, sdl file could not be built");
 	}
-	 */
-
 }

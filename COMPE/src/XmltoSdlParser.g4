@@ -49,7 +49,7 @@ com_type: TYPE EQUALS value;
 airport_close: OPEN SLASH AIRPORT CLOSE;
 airport_atr: (region | country | state | city | name |  lat |  lon |  alt | magvar | ident | airportTestRadius | trafficScalar)+;
 
-airport_content: ( tower | services | com | runway | runwayAlias | (taxiwayPoint taxiwayParking taxiName taxiwayPath) | helipad)+;
+airport_content: ( tower | services | com | runway | runwayAlias | (taxiwayPoint+ taxiwayParking+ taxiName+ taxiwayPath+) | helipad)+;
 
 tower: OPEN TOWER lat lon alt SLASH_CLOSE;
 
@@ -152,12 +152,12 @@ frequency: FREQUENCY EQUALS value;
 range: RANGE EQUALS value;
 backCourse: BACKCOURSE EQUALS value;
 
-ils_content: (glideSlope)* /*(dme)**/ (visualModel)*;
-glideSlope: OPEN GLIDESLOPE (lat | lon | alt | pitch | range)+ SLASH_CLOSE;
+ils_content: (glideSlope)* (dme)* (visualModel)*;
+glideSlope: OPEN GLIDESLOPE lat lon alt pitch range SLASH_CLOSE;
 dme: OPEN DME lat lon alt range SLASH_CLOSE;
 
 visualModel: visualModel_open visualModel_content visualModel_close;
-visualModel_open: OPEN VISUALMODEL (heading | imageComplexity | guid_name | instanceId)+ CLOSE;
+visualModel_open: OPEN VISUALMODEL heading imageComplexity guid_name instanceId CLOSE;
 imageComplexity: IMAGECOMPLEXITY EQUALS value;
 guid_name: NAME EQUALS value;
 instanceId: INSTANCEID EQUALS value;
@@ -170,14 +170,14 @@ biasZ_xyz: BIASZ EQUALS value;
 visualModel_close: OPEN SLASH VISUALMODEL CLOSE;
 ils_close: OPEN SLASH ILS CLOSE;
 
-runwayStart: OPEN RUNWAYSTART (runway_type | lat | lon | alt | heading end)+ SLASH_CLOSE;
+runwayStart: OPEN RUNWAYSTART runway_type lat lon alt heading end SLASH_CLOSE;
 runway_type: TYPE EQUALS value;
 
 runwayAlias: OPEN RUNWAYALIAS runway_number designator SLASH_CLOSE;
 
 
 
-helipad: OPEN HELIPAD (lat | lon | alt | surface | heading | length | width | helipad_type | closed | transparent | red | green | blue)+ SLASH_CLOSE;
+helipad: OPEN HELIPAD lat lon alt surface heading length width helipad_type closed? transparent? red? green? blue? SLASH_CLOSE;
 
 helipad_type: TYPE EQUALS value;
 closed: CLOSED EQUALS value;
@@ -187,7 +187,7 @@ green: GREEN EQUALS value;
 blue: BLUE EQUALS value;
 
 
-taxiwayPoint: OPEN TAXIWAYPOINT (index | taxiway_type | orientation | ((lat lon) | (biasX_xyz biasZ_xyz)))+ SLASH_CLOSE;
+taxiwayPoint: OPEN TAXIWAYPOINT index taxiway_type orientation ((lat lon) | (biasX_xyz biasZ_xyz)) SLASH_CLOSE;
 
 index: INDEX EQUALS value;
 taxiway_type: TYPE EQUALS value;
@@ -216,8 +216,15 @@ number:NUMBER EQUALS value;
 path_name:NAME EQUALS value;
 
 
-taxiwayParking: OPEN TAXIWAYPARKING (index | (lat lon | biasX biasZ) | heading | radius | parking_type | parking_name | number)+ SLASH_CLOSE;
+taxiwayParking: OPEN TAXIWAYPARKING index ((lat lon) | (biasX biasZ)) heading radius parking_type parking_name number airlineCodes? teeOffset1? teeOffset2? teeOffset3? teeOffset4? pushBack? SLASH_CLOSE;
 
 radius: RADIUS EQUALS value;
 parking_type: TYPE EQUALS value;
 parking_name: NAME EQUALS value; 
+airlineCodes: AIRLINECODES EQUALS value;
+teeOffset1: TEEOFFSET1 EQUALS value;
+teeOffset2: TEEOFFSET2 EQUALS value;
+teeOffset3: TEEOFFSET3 EQUALS value;
+teeOffset4: TEEOFFSET4 EQUALS value;
+pushBack: PUSHBACK EQUALS value;
+
