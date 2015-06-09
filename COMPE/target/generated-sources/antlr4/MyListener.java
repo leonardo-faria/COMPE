@@ -3045,7 +3045,7 @@ public class MyListener extends XmltoSdlParserBaseListener {
 			canBuildSdl = false;
 
 		} catch (NullPointerException e) {
-			System.out.println("Missing component taxiwayParking index");
+			System.out.println("Missing component taxiwayParking index line " + value.getStart().getLine());
 			canBuildSdl = false;
 		}
 
